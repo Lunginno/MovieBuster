@@ -11,6 +11,6 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getData(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/0');
+    return this.http.get('http://localhost:3000/movies'); 
   }
 }
