@@ -1,3 +1,80 @@
+
 .container{
-    justify-content: center;
+    // justify-content: center;
+    margin-top: 10%;
+    // background-color: #D9D9D9;
+    width: 80%;
+   
+
+
+
+ 
+}
+
+.row{
+//    width: 90%;
+   border: solid 1px rgb(0, 0, 0);
+   background-color: #D9D9D9;
+
+
+}
+img{
+    /* KungFuHustleHKposter 1 */
+
+    box-sizing: border-box;
+
+    // position:left;
+    // width: 356px;
+    // height: 760px;
+    // left: calc(50% - 356px/2 - 473px);
+    // bottom: 1657.99px;
+
+    // background: url(KungFuHustleHKposter.jpg);
+    border: 1px solid #000000;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+}
+.col-md-8{
+    .card-body{
+        
+    button{
+        /* 🦆 icon "bookmark" */
+
+        // position: absolute;
+        // width: 40;
+        // height: 60px;
+        // left: 502px;
+        // top: 746.01px;
+        padding: .3em 1.99em;
+        background-color: aqua;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    }
+    .card-title{
+    /* KUNG FU HUSTLE */
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 50px;
+        line-height: 61px;
+        /* identical to box height */
+
+        color: #000000;
+    }
+    .card-text{
+                /* Po is gearing up to become the spiritual leader of his Valley of Peace, but also needs someone to take his place as Dragon Warrior. As such, he will train a new kung fu practitioner for the spot and will encounter a villain called the Chameleon who conjures villains from the past. */
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 200;
+        font-size: 28px;
+        line-height: 46px;
+        color: #000000;
+
+    }
+    p{
+        margin-top: 13px;
+    }
+    }
 }
