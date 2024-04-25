@@ -8,17 +8,12 @@
 <form class="Signup" [formGroup]="signUp" (ngSubmit)="signup()">
     <div class="email">
       <label for="email">Email: </label>
-      <input required type="email" class="form-control" id="email" >
+      <input type="email" formControlName="email" class="form-control" id="email" >
     </div>
     <div class="pass" >
       <label for="password">Password:</label>
-      <input required type="password" class="form-control"  id="password" >
+      <input type="password" formControlName="password" class="form-control"  id="password" >
     </div>
-  
-    <div class="cpass">
-        <label for="cpassword">Confirm Password:</label>
-        <input required type="cpassword" class="form-control"  id="cpassowrd">
-      </div>
       <br>
     <button type="submit" >SIGN UP</button><br>
     <p>Already have an accout?   <a routerLink="/login">Sign In</a> </p>

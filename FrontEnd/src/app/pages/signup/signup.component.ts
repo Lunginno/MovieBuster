@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -11,18 +10,19 @@ import { Observable } from 'rxjs';
 })
 export class SignupComponent {
 
-  //signup will bw a formgroup object
+  //signup will be a formgroup object
   public signUp !: FormGroup
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router){}
+  constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router){}
 
   ngOnInit():void
   {
-    //assigns the form group created by formbuilder.group() to the sigUp
-   this.signUp = this.formBuilder.group({
-      email: [''],
-      password: ['']
+  
+    this.signUp=this.formbuilder.group({
+      email: new FormControl(''),
+      password: new FormControl(''),
 
     })
+  
   }
 
   signup()
@@ -31,14 +31,12 @@ export class SignupComponent {
 
       console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
-      console.log(this.signup());
-      
-      // this.router.navigate(["login"])
+      this.signUp.reset()
+      this.router.navigate(["login"])
     },error=>{
         alert("something went wrong");
 
     })
-    //send a request to the server
     
   }
 }

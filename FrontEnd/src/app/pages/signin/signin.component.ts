@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,17 +15,24 @@ constructor(private http: HttpClient, private router:Router, private formBuilder
 
 ngOnInit():void{
   this.signIn=this.formBuilder.group({
-    email:[""],
-    password:[""]
+    email:"",
+    password:""
   })
 }
 
 signInForm()
 {
   this.http.get<any>("http://localhost:3000/signupUsersList").subscribe(resp=>{
-    const user=resp.find((value:any)=>{
-      
-    })
+    const user=resp.find((details:any)=>{
+      return details.email === this.signIn.value.email && details.password === this.signIn.value.password
+    
+    });
+    if(user){
+      alert('Login Successful');
+      this.router.navigate(["register"])
+    }else{
+      alert("user not found")
+    }
   })
 }
 }
