@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { DataService } from 'src/app/services/data.service';
-import { Router, Routes } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
+import { DataApiService } from 'src/app/services/data-api.service';
 
 @Component({
   selector: 'app-cards',
@@ -11,18 +12,31 @@ import { Router, Routes } from '@angular/router';
 export class CardsComponent {
 
   data: any;
+  public id: number | undefined;
+  movie: any;
+  baseUrl: any;
+  apiKey: any;
 
-  constructor(private dataservice: DataService,private router :Router){}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private movieService: DataApiService,
+    private http: HttpClient
+  ) {}
 
-  ngOnInit(){
-    this.dataservice.getData().subscribe(response => {
-      this.data = response;
-      console.log(this.data);
+  ngOnInit() {
+    this.movieService.getMovie().subscribe((movies: any) => {
+      this.data = movies.results;
+      console.log('This is my data'+this.data);
     });
+
+  }
+  goToMovieDetails(id: number) {
+    this.router.navigate(['/movie-details', id]);
   }
 
-  buttonClick(){
-    this.router.navigate(['/movie-details']);
-  }
+  
 
+    
+  
 }

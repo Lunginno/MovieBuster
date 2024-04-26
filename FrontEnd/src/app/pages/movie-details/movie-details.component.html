@@ -1,23 +1,20 @@
-<app-nav-bar></app-nav-bar>
-<div class="container" style="max-width: 1200px;">
-    <div class="row">
-      <div class="col-md-4">
-        <img [src]="data[0].Images"/>
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h1 class="card-title">{{data[6].Title}}</h1>
-          <h4 class="card-text">{{data[0].Plot}}</h4>
-          <div>
-            <h5>{{data[0].imdbRating}}</h5>
-          </div>
-          <button>Add to watchilist</button>
-          <p>{{data[0].Genre}}</p>
-          <p>{{data[0].Actors}}</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="movie.poster_path" alt="Movie Poster">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h1 class="card-title">{{ movie.title }}</h1>
+        <h4 class="card-text">{{ movie.overview }}</h4>
+        <div>
+          <h5>{{ movie.vote_average }}</h5>
         </div>
+        <button>Add to watchlist</button>
+        <p>{{ movie.release_date }}</p>
+        <p>{{ movie.genres }}</p>
+        <p>{{ movie.cast }}</p>
       </div>
     </div>
-    <app-cards></app-cards>
   </div>
-
-  
+</div>

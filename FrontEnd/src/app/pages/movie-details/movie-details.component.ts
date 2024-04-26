@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataApiService } from 'src/app/services/data-api.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,14 +9,17 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent {
-  data: any;
+  movie: any;
 
-  constructor(private dataservice: DataService) { }
+  constructor(private movieService: DataApiService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.dataservice.getData().subscribe(response => {
-      this.data = response;
-      console.log(this.data);
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.movieService.getMovieDetails(id).subscribe((data: any) => {
+        this.movie = data;
+      });
     });
   
   }
