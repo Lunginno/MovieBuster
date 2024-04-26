@@ -7,7 +7,7 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 const routes: Routes = [
   {path:'nav' , component:NavBarComponent},
   {path: 'cards', component:CardsComponent},
-  {path: '',   redirectTo: 'cards', pathMatch: 'full' }, 
+  {path: '',   redirectTo: 'homep', pathMatch: 'full' }, 
   { path: 'movie-details/:id', component: MovieDetailsComponent },
 ];
 

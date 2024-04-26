@@ -12,6 +12,10 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -25,16 +29,17 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CardsComponent,
     HomePageComponent,
     MovieDetailsComponent,
-    
-    ProfileComponent
+    ProfileComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    
-  
-    
+    ReactiveFormsModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
