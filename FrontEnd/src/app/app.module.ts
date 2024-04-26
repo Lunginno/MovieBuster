@@ -14,22 +14,19 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieDetailsComponent,
     WatchlistComponent,
-    CardsComponent,
     HomePageComponent,
     NavBarComponent,
-    WatchlistComponent,
     CardsComponent,
-    HomePageComponent,
-    MovieDetailsComponent,
-    
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
