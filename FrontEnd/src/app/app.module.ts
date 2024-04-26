@@ -11,6 +11,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     HomePageComponent,
     MovieDetailsComponent,
     
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
