@@ -12,7 +12,10 @@ h5
 }
 
 .card{
-   max-width: 300px;
+   max-width: 295px;
+   height: 300px;
+   border-color: #04a9b2;
+   border-width: 2px;
 }
 
 // .card-img-top
@@ -24,10 +27,12 @@ h5
 
 .card-body{
     background-color: #1F2833;
+    height: 6rem;
+    text-align: left;
 }
 .card-img-top
 {
-    height: 250px;
+    height: 350px;
     width: 100%;
 }
 .card-title{

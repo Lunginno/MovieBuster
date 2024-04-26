@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./watchlist.component.scss']
 })
 export class WatchlistComponent {
+data: any;
 
 }
