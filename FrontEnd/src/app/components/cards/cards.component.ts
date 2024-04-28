@@ -28,15 +28,23 @@ export class CardsComponent {
     this.movieService.getMovie().subscribe((movies: any) => {
       this.data = movies.results;
       console.log('This is my data'+this.data);
+      // console.log('Id for movies'this.data.id);
+      
     });
 
-  }
-  goToMovieDetails(id: number) {
-    this.router.navigate(['/movie-details', id]);
-  }
-
-  
-
     
+    // this.movieService.getPopular(1).subscribe((movies: any) => {
+    //   this.movie = movies.results;
+    //   console.log('This is my data'+this.movie);
+    // });
+  }
+
+  goToMovieDetails(id: number) {
+    this.router.navigate(['/details', id]);
+  }
+
+ 
+  }
+
   
-}
+

@@ -1,19 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <img [src]="movie.poster_path" alt="Movie Poster">
+      <!-- <img [src]="movie.backdrop_path" alt="Movie Poster"> -->
+      <!-- Assuming you have the path stored in a variable or directly inputting it for demonstration -->
+     <!-- <img src="https://image.tmdb.org/t/p/w500/cxevDYdeFkiixRShbObdwAHBZry.jpg" alt="Movie Poster"> -->
+      <img [src]="getMovieImageUrl(movie.backdrop_path)" alt="movie.title">
+
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h1 class="card-title">{{ movie.title }}</h1>
+        <h1 class="card-title">{{ movie.original_title }}</h1>
         <h4 class="card-text">{{ movie.overview }}</h4>
         <div>
-          <h5>{{ movie.vote_average }}</h5>
+          <h5>IMDB RATING {{ movie.vote_average }}</h5>
         </div>
         <button>Add to watchlist</button>
-        <p>{{ movie.release_date }}</p>
+        <p>{{ movie.genres[0].name }}, {{ movie.genres[1].name }}, {{ movie.genres[2].name }}</p>
         <p>{{ movie.genres }}</p>
-        <p>{{ movie.cast }}</p>
+        <p>{{ movie.vote_average }}</p>
       </div>
     </div>
   </div>

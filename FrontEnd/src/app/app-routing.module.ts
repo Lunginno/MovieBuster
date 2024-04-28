@@ -23,7 +23,7 @@ const routes: Routes = [
   {path:'nav' , component:NavBarComponent},
   {path: 'cards', component:CardsComponent},
   {path: '',   redirectTo: 'homepage', pathMatch: 'full' }, 
-  {path: 'movie-details/:id', component: MovieDetailsComponent },
+  {path: 'details/:id', component: MovieDetailsComponent },
 ];
 
 @NgModule({
