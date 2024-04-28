@@ -14,7 +14,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModalComponent } from './components/cards/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { ModalComponent } from './components/cards/modal/modal.component';
     SignupComponent,
     SigninComponent,
     ProfileComponent,
-    ModalComponent
   ],
   imports: [
     BrowserModule,
