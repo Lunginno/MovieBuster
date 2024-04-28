@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CardsComponent } from './components/cards/cards.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
-
-
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { ProfileComponent } from './pages/profile/profile.component';
