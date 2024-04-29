@@ -14,6 +14,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SignupComponent,
     SigninComponent,
     ProfileComponent,
+    DashboardComponent,
 
   ],
   imports: [

@@ -8,6 +8,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 
@@ -21,9 +22,10 @@ const routes: Routes = [
   {path:'details/:id' , component:MovieDetailsComponent},
   {path:'nav' , component:NavBarComponent},
   {path: 'cards', component:CardsComponent},
-  {path: '',   redirectTo: 'homepage', pathMatch: 'full' }, 
+  {path: 'dashboard' , component:DashboardComponent},
+  {path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, 
   {path: 'details/:id', component: MovieDetailsComponent },
-  {path: '**', component:HomePageComponent},
+  {path: '**', component:DashboardComponent},
 ];
 
 @NgModule({
