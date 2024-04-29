@@ -37,7 +37,7 @@ export class CardsComponent {
       
     // });
 
-    // Combine both observables using forkJoin
+    // combines multiple observables into a single observable
     forkJoin([
       // this.movieService.getPopular(),
       // this.movieService.getMovie(),
