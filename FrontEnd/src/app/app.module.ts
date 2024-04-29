@@ -10,11 +10,11 @@ import { CardsComponent } from './components/cards/cards.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +24,18 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HomePageComponent,
     NavBarComponent,
     CardsComponent,
+    HomePageComponent,
+    MovieDetailsComponent,
+    ProfileComponent,
     SignupComponent,
     SigninComponent,
-    ProfileComponent
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     HttpClientModule,
 
