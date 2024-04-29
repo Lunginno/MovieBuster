@@ -10,15 +10,11 @@ import { catchError, map, tap } from 'rxjs/operators'; // "map" transforms obser
 })
 export class DeletebtnService {
 
-  private url = "our url";
+  private url = "https://www.themoviedb.org/";
   
   constructor(private http: HttpClient)
   {
 
   }
 
-  removeCard(id : Number):Observable<any>
-  {
-    return this.http.delete<any>(this.url)
-  }
 }
