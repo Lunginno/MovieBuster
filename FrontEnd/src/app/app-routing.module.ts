@@ -18,10 +18,12 @@ const routes: Routes = [
   {path:'home' , component:HomePageComponent},
   {path:'profile' , component:ProfileComponent},
   {path:'watchlist' , component:WatchlistComponent},
+  {path:'details/:id' , component:MovieDetailsComponent},
   {path:'nav' , component:NavBarComponent},
   {path: 'cards', component:CardsComponent},
   {path: '',   redirectTo: 'homepage', pathMatch: 'full' }, 
   {path: 'details/:id', component: MovieDetailsComponent },
+  {path: '**', component:HomePageComponent},
 ];
 
 @NgModule({

@@ -17,5 +17,9 @@ export class WatchlistService {
     return this.watchlistArray;
   }
 
+  removeMovie(movie: any){
+    this.watchlistArray.splice(this.watchlistArray.indexOf(movie), 1);
+  }
+
 
 }

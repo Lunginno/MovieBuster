@@ -16,7 +16,7 @@
           <h5>IMDB RATING {{ movie.vote_average }}</h5>
         </div>
         <div>
-          <button (click)="addToList(movie)">Add to watchlist</button>
+          <button (click)="addToList(movie)">{{ movie.addedToWatchlist ? 'Added' : 'Add to watchlist' }}</button>
         </div>
         
         <!-- <p>{{ movie.genres[0].name }}, {{ movie.genres[1].name }}, {{ movie.genres[2].name }}</p> -->

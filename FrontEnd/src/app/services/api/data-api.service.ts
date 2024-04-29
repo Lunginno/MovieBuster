@@ -22,25 +22,29 @@ export class DataApiService {
    
   }
 //movies
-  getMovie(): Observable<any> {
-    // return this.http.get(`${this.baseUrl}?api_key=${this.apiKey}&&page=1`);
-    return this.http.get(`${this.baseUrl}discover/movie?api_key=${this.apiKey}`);
-    // https://api.themoviedb.org/3/discover/movie?api_key=70eccbdfe28fcb50b5b1bc95a3789f1b
-  }
+ public url = '';
 
-  getPopular(page: number): Observable<any> {
+  getPopular(): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`);
+    return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=2}&language=${this.language}&region=${this.region}`);
   }
 
   searchMovies(searchStr: string): Observable<any> {
     return this.http.get(`${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchStr}`);
   }
 
-  // getPopular(page: number): Observable<any> {
-  //   // tslint:disable-next-line: max-line-length
-  //   return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`);
-  // }
+
+
+  getMovie(): Observable<any> {
+    // return this.http.get(`${this.baseUrl}?api_key=${this.apiKey}&&page=1`);
+    return (this.http.get(`${this.baseUrl}discover/movie?api_key=${this.apiKey}`) );
+    // https://api.themoviedb.org/3/discover/movie?api_key=70eccbdfe28fcb50b5b1bc95a3789f1b
+  }
+
+  getPopularr(page: number): Observable<any> {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`);
+  }
 
   getMoviedetails(id: number): Observable<any> {
     return this.http.get(`${this.baseUrldetails}/${id}?api_key=${this.apiKey}`);

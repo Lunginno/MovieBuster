@@ -15,6 +15,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SignupComponent,
     SigninComponent,
     ProfileComponent,
+
   ],
   imports: [
     BrowserModule,

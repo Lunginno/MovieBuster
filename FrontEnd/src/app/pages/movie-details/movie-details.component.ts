@@ -10,6 +10,7 @@ import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movie: any;
+  addedToWatchlist: boolean | undefined;
 
   constructor(
     private movieService: DataApiService,
@@ -34,8 +35,9 @@ export class MovieDetailsComponent implements OnInit {
     return `${baseUrl}${size}${path}`;
   }
 
-  addToList(m: any){
+  addToList(m: any){  
     this.watchlist.addToList(m);
+    m.addedToWatchlist = !m.addedToWatchlist;
     console.log('Movie added' + this.watchlist.getList());
   }
 
