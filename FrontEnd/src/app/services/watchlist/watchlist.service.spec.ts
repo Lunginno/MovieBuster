@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DataApiService } from './data-api.service';
+import { WatchlistService } from './watchlist.service';
 
-describe('DataApiService', () => {
-  let service: DataApiService;
+describe('WatchlistService', () => {
+  let service: WatchlistService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DataApiService);
+    service = TestBed.inject(WatchlistService);
   });
 
   it('should be created', () => {

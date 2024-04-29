@@ -15,7 +15,7 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 const routes: Routes = [
   {path: 'register', component: SignupComponent },
   {path: 'login', component: SigninComponent},
-  {path:'' , component:HomePageComponent},
+  {path:'home' , component:HomePageComponent},
   {path:'profile' , component:ProfileComponent},
   {path:'watchlist' , component:WatchlistComponent},
   {path:'nav' , component:NavBarComponent},

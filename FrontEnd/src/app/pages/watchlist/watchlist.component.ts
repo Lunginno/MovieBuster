@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 
 @Component({
   selector: 'app-watchlist',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./watchlist.component.scss']
 })
 export class WatchlistComponent {
-data: any;
+  constructor(private watchlistservice:WatchlistService){}
+  data: any[]=[];
+
+  ngOnInit(){
+    this.data = this.watchlistservice.getList();
+    console.log('watchlist data'  + this.data)
+  }
+
 
 }

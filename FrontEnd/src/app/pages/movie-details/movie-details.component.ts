@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataApiService } from 'src/app/services/data-api.service';
+import { DataApiService } from 'src/app/services/api/data-api.service';
+import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,7 +13,8 @@ export class MovieDetailsComponent implements OnInit {
 
   constructor(
     private movieService: DataApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private watchlist :WatchlistService,
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,13 @@ export class MovieDetailsComponent implements OnInit {
   }
   getMovieImageUrl(path: string): string {
     const baseUrl = 'https://image.tmdb.org/t/p/';
-    const size = 'w500';  // You can choose different sizes like 'w300', 'w780', etc.
+    const size = 'w780';  // You can choose different sizes like 'w300', 'w780', etc.
     return `${baseUrl}${size}${path}`;
   }
+
+  addToList(m: any){
+    this.watchlist.addToList(m);
+    console.log('Movie added' + this.watchlist.getList());
+  }
+
 }

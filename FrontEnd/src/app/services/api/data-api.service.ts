@@ -14,7 +14,7 @@ export class DataApiService {
   baseUrldetails: string ;
 
     constructor( private http: HttpClient) { 
-    this.baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+    this.baseUrl = 'https://api.themoviedb.org/3/';
     this.baseUrldetails = 'https://api.themoviedb.org/3/movie';
     this.apiKey = '70eccbdfe28fcb50b5b1bc95a3789f1b';
     this.language = 'en-US';
@@ -23,8 +23,18 @@ export class DataApiService {
   }
 //movies
   getMovie(): Observable<any> {
-    return this.http.get(`${this.baseUrl}?api_key=${this.apiKey}&&page=1`);
+    // return this.http.get(`${this.baseUrl}?api_key=${this.apiKey}&&page=1`);
+    return this.http.get(`${this.baseUrl}discover/movie?api_key=${this.apiKey}`);
     // https://api.themoviedb.org/3/discover/movie?api_key=70eccbdfe28fcb50b5b1bc95a3789f1b
+  }
+
+  getPopular(page: number): Observable<any> {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`);
+  }
+
+  searchMovies(searchStr: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchStr}`);
   }
 
   // getPopular(page: number): Observable<any> {

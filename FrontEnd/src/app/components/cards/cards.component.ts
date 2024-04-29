@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DataApiService } from 'src/app/services/data-api.service';
+import { DataApiService } from 'src/app/services/api/data-api.service';
 
 @Component({
   selector: 'app-cards',
