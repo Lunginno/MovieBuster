@@ -8,7 +8,7 @@ h2{
     border-radius: 30px;
     padding: 20px;
     width: 350px;
-    height: 400px;
+    height: 450px;
     color: #f4f2f2;
     margin-top: 200px;
 
@@ -37,4 +37,10 @@ button{
 .cpass{
     padding: 5px;
     border-radius: 15px;
+}
+.error{
+    color: rgb(120, 16, 16);
+}
+small{
+    color: rgb(120, 16, 16);
 }
