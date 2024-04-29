@@ -11,25 +11,28 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
-  //signup will be a formgroup object
   public signUp !: FormGroup
 
   constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router){}
 
+  //its void beause it doesnt retun anything
   ngOnInit():void
   {
-  
+   //Initialize the signIn form group with email, password and confirm password form controls
     this.signUp=this.formbuilder.group({
       email: new FormControl('',Validators.required),
       password: new FormControl('',Validators.required),
       cpassword: new FormControl('',Validators.required)
+
+      //in the formgroup custom validator called checkpassword
     },{validator:this.checkPasswords });
   }
+//takes a FormGroup as an argument, which represents the entire form group to be validated
   checkPasswords(formgroup:FormGroup):any{
     
     const password =formgroup.get('password')?.value;
     const cpassword =formgroup.get('cpassword')?.value;
-    //return password === cpassword?null:{mismatch:true}
+
     if (password === cpassword) {
       return null; // Passwords match
   } else {
@@ -40,8 +43,9 @@ export class SignupComponent {
 
   signup()
   {
+    //we posting the value of the signup form to the json file
     this.http.post<any>("http://localhost:3000/signupUsersList/",this.signUp.value).subscribe(resp=>{
-
+//once the data is posted it respond with sign up successful
       console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
       this.signUp.reset()
