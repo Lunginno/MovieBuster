@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./watchlist.component.scss']
 })
 export class WatchlistComponent {
+data: any;
 
   constructor(private http: HttpClient)
   {

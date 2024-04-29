@@ -1,23 +1,25 @@
 import { Component } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
-  selector: 'app-cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss']
+  selector: 'app-movie-details',
+  templateUrl: './movie-details.component.html',
+  styleUrls: ['./movie-details.component.scss']
 })
-export class CardsComponent {
-
+export class MovieDetailsComponent {
   data: any;
 
-  constructor(private dataservice: DataService){}
+  constructor(private dataservice: DataService) { }
 
-  ngOnInit(){
+  ngOnInit(): void {
     this.dataservice.getData().subscribe(response => {
       this.data = response;
       console.log(this.data);
     });
+  
   }
+  
+
 
 }
+

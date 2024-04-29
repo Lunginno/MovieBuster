@@ -1,5 +1,6 @@
-[
-    {
+{
+    "movies":[
+      {
       "Title": "Avatar",
       "Year": "2009",
       "Rated": "PG-13",
@@ -468,4 +469,11 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjMyNjg5ODYwNF5BMl5BanBnXkFtZTgwMTE1NDU4OTE@._V1_SY1000_CR0,0,1477,1000_AL_.jpg"
       ]
     }
-  ]
+
+    ]
+  
+ 
+}
+
+
+
