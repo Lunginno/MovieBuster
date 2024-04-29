@@ -1,6 +1,7 @@
+import { group } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {  FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,18 +13,30 @@ export class SignupComponent {
 
   //signup will be a formgroup object
   public signUp !: FormGroup
+
   constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router){}
 
   ngOnInit():void
   {
   
     this.signUp=this.formbuilder.group({
-      email: new FormControl(''),
-      password: new FormControl(''),
-
-    })
-  
+      email: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required),
+      cpassword: new FormControl('',Validators.required)
+    },{validator:this.checkPasswords });
   }
+  checkPasswords(formgroup:FormGroup):any{
+    
+    const password =formgroup.get('password')?.value;
+    const cpassword =formgroup.get('cpassword')?.value;
+    //return password === cpassword?null:{mismatch:true}
+    if (password === cpassword) {
+      return null; // Passwords match
+  } else {
+      return { passwordMismatch: true }; // Passwords don't match
+  }
+}
+  
 
   signup()
   {
@@ -37,6 +50,9 @@ export class SignupComponent {
         alert("something went wrong");
 
     })
+  }
     
   }
-}
+
+
+

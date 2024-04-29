@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,9 +15,10 @@ constructor(private http: HttpClient, private router:Router, private formBuilder
 
 ngOnInit():void{
   this.signIn=this.formBuilder.group({
-    email:"",
-    password:""
+    email:["",Validators.required],
+    password:["",Validators.required]
   })
+  
 }
 
 signInForm()
@@ -34,6 +35,8 @@ signInForm()
       alert("user not found")
     }
   })
+  
 }
+
 }
 

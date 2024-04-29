@@ -3,15 +3,20 @@
 
 <div class="container">
 <h2>Sign In</h2>
-<form class="signIn" [formGroup]="signIn" (ngSubmit)="signInForm()">
+<form class="Signup" [formGroup]="signIn" (ngSubmit)="signInForm()">
+
     <div class="email">
       <label for="email">Email: </label>
       <input type="email" formControlName="email" class="form-control" id="email">
     </div>
+    <div class="error" *ngIf="signIn.get('email')?.hasError('required')&& signIn.get('email')?.touched">Email is required</div>
+
     <div class="pass" >
       <label for="password">Password:</label>
       <input type="password" formControlName="password" class="form-control"  id="password">
     </div>
+    <div class="error" *ngIf="signIn.get('password')?.hasError('required')&& signIn.get('password')?.touched">Password is required</div>
+    
       <br>
     <button type="submit" >SIGN IN</button><br><br>
     <p>Not a User? <a routerLink="/register">Create an account</a> </p>
