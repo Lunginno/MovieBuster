@@ -30,7 +30,7 @@ signInForm()
     });
     if(user){
       alert('Login Successful');
-      this.router.navigate(["register"])
+      this.router.navigate(["home"])
     }else{
       alert("user not found")
     }

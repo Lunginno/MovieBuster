@@ -42,10 +42,10 @@ export class SignupComponent {
   {
     this.http.post<any>("http://localhost:3000/signupUsersList/",this.signUp.value).subscribe(resp=>{
 
-      console.log('sign up successful');
+      // console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
       this.signUp.reset()
-      this.router.navigate(["login"])
+      this.router.navigate(["home"])
     },error=>{
         alert("something went wrong");
 
