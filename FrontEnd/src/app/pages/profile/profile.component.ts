@@ -29,5 +29,6 @@ export class ProfileComponent implements OnInit {
     this.pp.logout();
     this.isLoggedIn = false;
     this.userEmail = '';
+    
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DataApiService } from 'src/app/services/api/data-api.service';
 import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 import { Router } from '@angular/router';
+import { PpService } from 'src/app/services/pp.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -14,14 +15,15 @@ import { Router } from '@angular/router';
 export class MovieDetailsComponent implements OnInit {
   movie: any;
   addedToWatchlist: boolean = false;
-  statusTheWatchlist: boolean = false;
-  status: boolean = false;
+  public statusTheWatchlist: boolean = false;
+  public status: boolean = false;
 
   constructor(
     private movieService: DataApiService,
     private route: ActivatedRoute,
     private watchlist :WatchlistService,
-    private router: Router
+    private router: Router,
+    private auth: PpService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,12 @@ export class MovieDetailsComponent implements OnInit {
       });
     });
 
+    this.status = this.auth.getIsLoggedIn();
+    // if(this.status){
+
+    // }
+
+
   }
   getMovieImageUrl(path: string): string {
     const baseUrl = 'https://image.tmdb.org/t/p/';
@@ -42,24 +50,33 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   addToList(m: any){  
+    if (this.status === true)
+    {
     this.watchlist.addToList(m);
     m.addedToWatchlist = !m.addedToWatchlist;
     console.log('Movie added' + this.watchlist.getList());
-  }
-
-  checkStatus()
-  {
-    if (this.status === false)
-    {
+    }
+    else{
       alert("User account not found, directing you to sign in...")
       this.router.navigate(['login']);
     }
-    else
-    {
-      return this.addToList(this.movie);
-    }
 
   }
+
+  // checkStatus()
+  // {
+  //   if (this.status === false)
+  //   {
+  //     alert("User account not found, directing you to sign in...")
+  //     this.router.navigate(['login']);
+  //   }
+  //   else
+  //   {
+  //     return this.addToList(this.movie);
+      
+  //   }
+
+  // }
 
   // clearList()
   // {

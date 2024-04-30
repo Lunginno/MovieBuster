@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PpService } from 'src/app/services/pp.service';
+import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 
 @Component({
   selector: 'app-signin',
@@ -14,7 +15,9 @@ public signIn !: FormGroup
 public isLoggedIn: boolean = false;
   public userEmail: string = '';
 
-constructor(private http: HttpClient, private router:Router, private formBuilder: FormBuilder, private authsev:PpService){}
+
+
+constructor(private http: HttpClient, private router:Router, private formBuilder: FormBuilder, private authsev:PpService, private watchlist:WatchlistService){}
 
 ngOnInit():void{
   this.signIn=this.formBuilder.group({
@@ -36,6 +39,7 @@ signInForm()
       this.userEmail = this.signIn.value.email;
       this.isLoggedIn = true;
       this.authsev.login(this.userEmail);
+      this.watchlist.clearList();
       console.log(this.userEmail)
       this.signIn.reset();
       this.router.navigate(["home"])
