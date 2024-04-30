@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { Observable, Subject, catchError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -52,6 +52,17 @@ export class DataApiService {
     // https://api.themoviedb.org/3/discover/moviemovie/157336?api_key=70eccbdfe28fcb50b5b1bc95a3789f1b
   }
 
+  private searchQuerySource = new Subject<string>();
+  searchQuery$ = this.searchQuerySource.asObservable();
+
+  // setSearchQuery(query: string): void {
+  //   this.searchQuerySource.next(query);
+  // }
+
+  setSearchQuery(query: string): void {
+    // console.log('API Search query set:', query); // Add this line
+    this.searchQuerySource.next(query);
+  }
 
 
 }

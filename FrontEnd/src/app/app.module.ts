@@ -13,7 +13,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
@@ -33,6 +33,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ProfileComponent,
     DashboardComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     HttpClientModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
 
   ],
   providers: [],
