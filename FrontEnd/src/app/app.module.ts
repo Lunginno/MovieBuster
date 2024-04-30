@@ -31,7 +31,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     SignupComponent,
     SigninComponent,
     ProfileComponent,
-    DashboardComponent,
+    DashboardComponent
 
 
   ],

@@ -21,5 +21,10 @@ export class WatchlistService {
     this.watchlistArray.splice(this.watchlistArray.indexOf(movie), 1);
   }
 
+  clearList()
+  {
+    return this.watchlistArray  = [];
+  }
+
 
 }

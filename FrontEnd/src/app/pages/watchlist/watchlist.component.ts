@@ -24,6 +24,8 @@ export class WatchlistComponent {
   goToMovieDetails(id: number) {
     this.router.navigate(['/details', id]);
   }
+
+  
     
   
 
