@@ -14,7 +14,7 @@ export class DataApiService {
   baseUrldetails: string ;
 
     constructor( private http: HttpClient) { 
-    this.baseUrl = 'https://api.themoviedb.org/3/';
+    this.baseUrl = 'https://api.themoviedb.org/3/'; 
     this.baseUrldetails = 'https://api.themoviedb.org/3/movie';
     this.apiKey = '70eccbdfe28fcb50b5b1bc95a3789f1b';
     this.language = 'en-US';

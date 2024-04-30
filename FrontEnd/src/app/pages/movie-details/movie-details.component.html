@@ -16,13 +16,14 @@
           <h5>IMDB RATING {{ movie.vote_average }}</h5>
         </div>
         <div>
-          <button (click)="addToList(movie)">{{ movie.addedToWatchlist ? 'Added' : 'Add to watchlist' }}</button>
+          <!-- use addedToWatchlist after the login is done-->
+          <button (click)="checkStatus()">{{ movie.statusWatchlist? 'Added' : 'Add to watchlist' }}</button>
         </div>
         
         <!-- <p>{{ movie.genres[0].name }}, {{ movie.genres[1].name }}, {{ movie.genres[2].name }}</p> -->
-        <div *ngFor="let item of movie.genres" class="pstyle">
+        <!-- <div *ngFor="let item of movie.genres" class="pstyle">
           <p> {{ item.name }}</p>
-        </div>
+        </div> -->
         <!-- <p>{{ movie.vote_average }}</p> -->
         
       </div>
