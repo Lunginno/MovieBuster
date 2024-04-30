@@ -14,7 +14,7 @@ import { PpService } from 'src/app/services/pp.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movie: any;
-  addedToWatchlist: boolean = false;
+  addedToWatchlist: boolean | undefined;
   public statusTheWatchlist: boolean = false;
   public status: boolean = false;
 
@@ -54,7 +54,7 @@ export class MovieDetailsComponent implements OnInit {
     {
     this.watchlist.addToList(m);
     m.addedToWatchlist = !m.addedToWatchlist;
-    console.log('Movie added' + this.watchlist.getList());
+    // console.log('Movie added' + this.watchlist.getList());
     }
     else{
       alert("User account not found, directing you to sign in...")
