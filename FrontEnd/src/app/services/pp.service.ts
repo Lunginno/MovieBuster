@@ -6,28 +6,28 @@ import { Observable, catchError, map } from 'rxjs';
   providedIn: 'root'
 })
 export class PpService {
-  private isLoggedIn: boolean = false;
-  private loggedInUserEmail: string = '';
+  private   UserLoggedIn: boolean = false;
+  private loggedInEmail: string = '';
 
   constructor() { }
   login(email: string): void {
-    this.isLoggedIn = true;
-    this.loggedInUserEmail = email;
+    this.UserLoggedIn = true;
+    this.loggedInEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
   }
   
   logout(): void {
-    this.isLoggedIn = false;
-    this.loggedInUserEmail = '';
+    this.UserLoggedIn = false;
+    this.loggedInEmail = '';
     localStorage.removeItem('loggedInUserEmail');
   }
 
   getIsLoggedIn(): boolean {
-    return this.isLoggedIn;
+    return this.UserLoggedIn;
   }
 
   getLoggedInUserEmail(): string {
-    return this.loggedInUserEmail;
+    return this.loggedInEmail;
   }
 
   initAuth(): void {

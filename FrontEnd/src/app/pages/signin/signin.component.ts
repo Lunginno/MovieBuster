@@ -11,7 +11,7 @@ import { PpService } from 'src/app/services/pp.service';
 })
 export class SigninComponent {
 public signIn !: FormGroup
-public isLoggedIn: boolean = false;
+public UserLoggedIn: boolean = false;
   public userEmail: string = '';
 
 constructor(private http: HttpClient, private router:Router, private formBuilder: FormBuilder, private authsev:PpService){}
@@ -34,12 +34,12 @@ signInForm()
     if(user){
       alert('Login Successful');
       this.userEmail = this.signIn.value.email;
-      this.isLoggedIn = true;
+      this.UserLoggedIn = true;
       this.authsev.login(this.userEmail);
       console.log(this.userEmail)
       this.signIn.reset();
       this.router.navigate(["home"])
-      console.log(this.isLoggedIn);
+      console.log(this.UserLoggedIn);
     }else{
       alert("user not found")
     }
