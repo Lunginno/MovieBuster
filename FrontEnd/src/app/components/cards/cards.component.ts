@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
 import { DataApiService } from 'src/app/services/api/data-api.service';
+import { PpService } from 'src/app/services/pp.service';
 
 @Component({
   selector: 'app-cards',
@@ -16,15 +17,26 @@ export class CardsComponent {
   movie: any;
   baseUrl: any;
   apiKey: any;
+  isLoggedIn: boolean = false;
+  userEmail: string = '';
+  searchQuery: string = '';
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private movieService: DataApiService,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth:PpService
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn = this.auth.getIsLoggedIn();
+    console.log(this.isLoggedIn)
+    if (this.isLoggedIn) {
+      this.userEmail = this.auth.getLoggedInUserEmail();
+      console.log('User email'+this.userEmail)
+    }
+    
     // this.movieService.getPopular().subscribe((movies: any) => {
     //   this.data = movies.results;
     //   console.log('This is my data'+this.data);
@@ -38,6 +50,7 @@ export class CardsComponent {
     // });
 
     // combines multiple observables into a single observable
+  
     forkJoin([
       // this.movieService.getPopular(),
       // this.movieService.getMovie(),
