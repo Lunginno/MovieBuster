@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataApiService } from 'src/app/services/api/data-api.service';
+
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,12 +11,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router, private MoviaApiService: DataApiService){}
+
+  searchQuery: string = '';
+  public data: any[] = [];
+  myGroup: any;
+
+
+  ngOnit(){
+  }
+
+  searchMovies(): void {
+    // console.log(this.searchQuery+ ' search');
+    this.MoviaApiService.setSearchQuery(this.searchQuery); // Use the service to set the search query
+  }
+
+
+
+  ngOnInit(): void {
+  }
+
 
   onClick(){
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/profile']);//takes user to their profile
   }
   onHome(){
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home'])//takes user back to home page
   }
 }

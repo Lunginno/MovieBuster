@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { PpService } from 'src/app/services/pp.service';
 
 
 @Component({
@@ -11,14 +9,23 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  signin: any;
+  isLoggedIn: boolean = false;
+  userEmail: string = '';
 
-  constructor(private http: HttpClient,private signinserv :AuthService) {}
+  constructor(private http: HttpClient,private pp:PpService) {}
 
   ngOnInit() {
-    this.signinserv.signIn().subscribe((data: any) => {
-      this.signin = data;
-      // console.log(this.signin[0].email);
-    });
+    this.isLoggedIn = this.pp.getIsLoggedIn();
+    console.log(this.isLoggedIn);
+    if (this.isLoggedIn) {
+      this.userEmail = this.pp.getLoggedInUserEmail();
+    }
+  
+  }
+  logout(): void {
+    this.pp.logout();
+    this.isLoggedIn = false;
+    this.userEmail = '';
+    
   }
 }

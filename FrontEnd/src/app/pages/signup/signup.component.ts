@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {  FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PpService } from 'src/app/services/pp.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,8 +14,11 @@ export class SignupComponent {
 
   //signup will be a formgroup object
   public signUp !: FormGroup
+  public userLoggedIn: boolean = false;
+  public userEmail: string = '';
 
-  constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router){}
+
+  constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router,private authsev:PpService){}
 
   ngOnInit():void
   {
@@ -44,6 +48,11 @@ export class SignupComponent {
 
       // console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
+      this.userEmail = this.signUp.value.email;
+      this.userLoggedIn = true;
+      this.authsev.login(this.userEmail);
+      console.log(this.userEmail)
+      this.signUp.reset();
       this.signUp.reset()
       this.router.navigate(["home"])
     },error=>{
