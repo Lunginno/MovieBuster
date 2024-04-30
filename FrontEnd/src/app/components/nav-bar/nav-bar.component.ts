@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataApiService } from 'src/app/services/api/data-api.service';
 
 
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -27,10 +28,14 @@ export class NavBarComponent {
 
 
 
+  ngOnInit(): void {
+  }
+
+
   onClick(){
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/profile']);//takes user to their profile
   }
   onHome(){
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home'])//takes user back to home page
   }
 }

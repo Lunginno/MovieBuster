@@ -14,7 +14,7 @@ export class WatchlistComponent {
 
   ngOnInit(){
     this.data = this.watchlistservice.getList();
-    console.log('watchlist data'  + this.data)
+    // console.log('watchlist data'  + this.data)
     // this.watchlistservice.removeMovie(this.data);
   }
 
