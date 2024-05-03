@@ -21,7 +21,7 @@
     <div class="error" *ngIf="signIn.get('password')?.hasError('required')&& signIn.get('password')?.touched">Password is required</div>
     
       <br>
-    <button type="submit" >SIGN IN</button><br><br>
+    <button type="submit" [disabled]="signIn.invalid">SIGN IN</button><br><br>
     <p>Not a User? <a routerLink="/register">Create an account</a> </p>
   </form>
 </div>
