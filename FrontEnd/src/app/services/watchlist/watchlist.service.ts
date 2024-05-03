@@ -8,10 +8,21 @@ export class WatchlistService {
   constructor() { }
 
   private watchlistArray: any[] = [];
+  private addedMovies: any[] = [];
 
   addToList(movie: any){
-    this.watchlistArray.push(movie);
+    if(!(this.addedMovies.includes(movie.id))){
+      this.addedMovies.push(movie.id);
+      if(!(this.watchlistArray.includes(movie))){
+        this.watchlistArray.push(movie);
+      }else{
+        alert('Movie already added');
+      }
+    }else{
+      alert('Movie already added');
+    }
   }
+
 
   getList(){
     return this.watchlistArray;
@@ -25,6 +36,7 @@ export class WatchlistService {
   {
     return this.watchlistArray  = [];
   }
+
 
 
 }

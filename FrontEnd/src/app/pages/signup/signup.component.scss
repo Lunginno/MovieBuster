@@ -23,8 +23,17 @@ button{
     border-radius: 15px;
     width: 90px;
     height: 40px;
-    border-color: #66FCF1;
+    border-color: solid 1px #66FCF1;
+    color: rgba(0, 0, 0, 0.559); /* Add text color */
+    font-size: 16px; /* Add font size */
+    // font-weight: bold; /* Add font weight */
+    cursor: pointer;
+    border: 1px ; 
 
+}
+button:hover {
+    background-color: #00ffee9a; /* Change color on hover */
+    border-color: solid 1px #000000;
 }
 .email{
     padding: 5px;
@@ -40,7 +49,14 @@ button{
 }
 .error{
     color: rgb(120, 16, 16);
+    text-emphasis: none;
+    text-decoration: none;
+    font-weight: 400;
 }
 small{
     color: rgb(120, 16, 16);
+}
+input::placeholder {
+    color: #f0efef;
+    text-decoration-color: azure;
 }

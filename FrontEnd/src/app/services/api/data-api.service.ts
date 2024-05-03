@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, catchError } from 'rxjs';
+import { Observable, Subject, catchError, pipe, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class DataApiService {
   }
 
   searchMovies(searchStr: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchStr}`);
+    return this.http.get(`${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchStr}`)
   }
 
 
@@ -43,7 +43,7 @@ export class DataApiService {
 
   getPopularr(page: number): Observable<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`);
+    return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}`);
   }
 
   getMoviedetails(id: number): Observable<any> {
@@ -55,12 +55,9 @@ export class DataApiService {
   private searchQuerySource = new Subject<string>();
   searchQuery$ = this.searchQuerySource.asObservable();
 
-  // setSearchQuery(query: string): void {
-  //   this.searchQuerySource.next(query);
-  // }
+
 
   setSearchQuery(query: string): void {
-    // console.log('API Search query set:', query); // Add this line
     this.searchQuerySource.next(query);
   }
 
