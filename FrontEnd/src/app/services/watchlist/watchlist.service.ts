@@ -10,7 +10,12 @@ export class WatchlistService {
   private watchlistArray: any[] = [];
 
   addToList(movie: any){
-    this.watchlistArray.push(movie);
+    if(!(this.watchlistArray.includes(movie))){
+      this.watchlistArray.push(movie);
+    }else{
+      alert('Movie already added');
+    }
+   
   }
 
   getList(){
@@ -25,6 +30,7 @@ export class WatchlistService {
   {
     return this.watchlistArray  = [];
   }
+
 
 
 }
