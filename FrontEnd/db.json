@@ -5,6 +5,19 @@
       "email": "shero@gmail.com",
       "password": "1234",
       "cpassword": "1234"
+    },
+    {
+      "email": "sheroline@gmail.com",
+      "password": "9999",
+      "cpassword": "9999",
+      "id": 2
+    },
+    {
+      "email": "sherolin@gmail.com",
+      "password": "1234",
+      "cpassword": "1234",
+      "id": 3
     }
+    
   ]
 }

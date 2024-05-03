@@ -10,16 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-
+//formgroup define how all the different parts of your form should be organized and connected
   public signUp !: FormGroup
 
   constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router){}
 
   //its void beause it doesnt retun anything
+  //it initializes tasks within a componentskk
   ngOnInit():void
   {
    //Initialize the signIn form group with email, password and confirm password form controls
+   //A form group is a collection of form controls
     this.signUp=this.formbuilder.group({
+      //form control lets you input or output data in a specific field of your form.
       email: new FormControl('',Validators.required),
       password: new FormControl('',Validators.required),
       cpassword: new FormControl('',Validators.required)
@@ -43,20 +46,34 @@ export class SignupComponent {
 
   signup()
   {
+    //check if the signup form is invalid
+    if(this.signUp.invalid)return;
+    //getting the email value from the form
+    const userEmail=this.signUp.get('email')?.value;
+    //email as a query parameter(is a way to pass data between web pages)
+    this.http.get<any>(`http://localhost:3000/signupUsersList/?email=${userEmail}`).subscribe(existingUser => {
+    //checks if the response from the server contains any existing user data. 
+    if (existingUser.length > 0) {
+        // Email already exists, inform the user and prevent signup
+        alert('Email already registered.');
+      } else {
+
+    
     //we posting the value of the signup form to the json file
     this.http.post<any>("http://localhost:3000/signupUsersList/",this.signUp.value).subscribe(resp=>{
-//once the data is posted it respond with sign up successful
+//  once the data is posted it respond with sign up successful
       console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
       this.signUp.reset()
       this.router.navigate(["login"])
+      
     },error=>{
         alert("something went wrong");
 
-    })
+    });
+    }})
+  
   }
-    
-  }
 
 
-
+}

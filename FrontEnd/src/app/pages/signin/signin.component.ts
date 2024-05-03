@@ -12,6 +12,7 @@ export class SigninComponent {
   //we use !: to tell the compiler that the formgroup is not null or undefined
 public signIn !: FormGroup
 
+
 //formbuilder id used to create form groups and controls.
 constructor(private http: HttpClient, private router:Router, private formBuilder: FormBuilder){}
 
@@ -24,7 +25,7 @@ ngOnInit():void{
   
 }
 
-// it is triggered when a user clickx the submit login form
+// it is triggered when a user clicks the submit login form
 signInForm()
 {
   //Sends HTTP GET request to retrieve user data

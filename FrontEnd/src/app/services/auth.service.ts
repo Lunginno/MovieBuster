@@ -7,20 +7,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  currentUser:any
 
   private url = 'http://localhost:3000/signupUsersList';
 
   constructor(private http:HttpClient) { }
 
-  signIn() : Observable<any>
-  {
-    return this.http.get<any>(this.url);
+  login(email:string, password:string):void{
+    if(email==='groupB@gmail.com' && password==='12334'){
+      this.currentUser={
+        email:email
+      };
+      console.log(this.currentUser);
+    }else{
+      console.log("user not found");
+    }
   }
 
-  signUp(data:any)
-  {
-    const info = {'content-type': 'app/json'}
-    const body = JSON.stringify(data);
-    return this.http.post(this.url + 'data', body)
+  getCurrentUser(): any{
+    return this.currentUser;
   }
 }
