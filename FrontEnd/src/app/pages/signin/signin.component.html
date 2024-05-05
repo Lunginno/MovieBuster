@@ -7,18 +7,18 @@
 
     <div class="email">
       <label for="email">Email: </label>
-      <input type="email" formControlName="email" class="form-control" id="email">
+      <input type="email" formControlName="email" class="form-control" id="email" placeholder="example@gmail.com">
     </div>
     <div class="error" *ngIf="signIn.get('email')?.hasError('required')&& signIn.get('email')?.touched">Email is required</div>
 
     <div class="pass" >
       <label for="password">Password:</label>
-      <input type="password" formControlName="password" class="form-control"  id="password">
+      <input type="password" formControlName="password" class="form-control"  id="password" placeholder="password">
     </div>
     <div class="error" *ngIf="signIn.get('password')?.hasError('required')&& signIn.get('password')?.touched">Password is required</div>
     
       <br>
-    <button type="submit" >SIGN IN</button><br><br>
+    <button type="submit" [disabled]="signIn.invalid">SIGN IN</button><br><br>
     <p>Not a User? <a routerLink="/register">Create an account</a> </p>
     
   </form>
