@@ -7,4 +7,11 @@
       <p>Release date: {{item.release_date}}</p>
     </div>
   </div>
+  <div class="searcherror" *ngIf="EmptyList">
+    <p>No movies found.</p>
+  </div>
+  <div *ngIf="errormessage">
+    <p>{{ errormessage }}</p>
+  </div>
+  
 </div>

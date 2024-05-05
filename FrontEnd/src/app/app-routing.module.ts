@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:'details/:id' , component:MovieDetailsComponent},
   {path:'nav' , component:NavBarComponent},
   {path: 'cards', component:CardsComponent},
-  {path: 'dashboard' , component:DashboardComponent},
+  // {path: 'dashboard' , component:DashboardComponent},
   {path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, 
   {path: 'details/:id', component: MovieDetailsComponent },
   {path: '**', component:DashboardComponent}

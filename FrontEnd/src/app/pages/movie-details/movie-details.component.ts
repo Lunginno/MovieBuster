@@ -53,7 +53,7 @@ export class MovieDetailsComponent implements OnInit {
     if (this.status === true)
     {
     this.watchlist.addToList(m);
-    m.addedToWatchlist = !m.addedToWatchlist;
+    // m.addedToWatchlist = !m.addedToWatchlist;
     // console.log('Movie added' + this.watchlist.getList());
     }
     else{

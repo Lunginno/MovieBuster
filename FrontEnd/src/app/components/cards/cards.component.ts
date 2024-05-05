@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { DataApiService } from 'src/app/services/api/data-api.service';
 import { PpService } from 'src/app/services/pp.service';
 
@@ -14,6 +14,7 @@ export class CardsComponent {
 
   data: any[] = [];
   errormessage: string='';
+  EmptyList: boolean = false;
 ;
   public id: number | undefined;
   movie: any;
@@ -29,91 +30,70 @@ export class CardsComponent {
     private movieService: DataApiService,
     private http: HttpClient,
     private auth:PpService
-  ) {}
+  ) {
+   
+  }
 
   ngOnInit() {
+    this.fetchAllMovies();
     this.isLoggedIn = this.auth.getIsLoggedIn();
     console.log(this.isLoggedIn)
     if (this.isLoggedIn) {
       this.userEmail = this.auth.getLoggedInUserEmail();
       console.log('User email'+this.userEmail)
     }
-    
-    // this.movieService.getPopular().subscribe((movies: any) => {
-    //   this.data = movies.results;
-    //   console.log('This is my data'+this.data);
-    //   // console.log('Id for movies'this.data.id);
-      
-    // });
-    // this.movieService.getMovie().subscribe((movies: any) => {
-    //   this.data = movies.results;
-    //   // console.log('Id for movies'this.data.id);
-      
-    // });
-
-    // combines multiple observables into a single observable
-  
-    forkJoin([
-      // this.movieService.getPopular(),
-      // this.movieService.getMovie(),
-      this.movieService.getPopularr(1),
-      this.movieService.getPopularr(2),
-      this.movieService.getPopularr(3),
-      this.movieService.getPopularr(4),
-      this.movieService.getPopularr(5),
-      this.movieService.getPopularr(6),
-    ]).subscribe(([popularMovie1, popularMovie2, popularMovie3, popularMovie4, popularMovie5, popularMovie6]) => {
-    //   this.data = [...popularMovies.results,...allMovies.results]; is an array 
-      this.data = [
-        ...popularMovie1.results,
-        ...popularMovie2.results,
-        ...popularMovie3.results,
-        ...popularMovie4.results,
-        ...popularMovie5.results,
-        ...popularMovie6.results
-      
-      ];
-      // console.log('Merged data:', this.data);
+    this.movieService.movieCategory$.subscribe(category => {
+      this.loadMovies(category);
     });
 
     this.movieService.searchQuery$.subscribe((query: string) => {
-      // console.log('Cards : Received search query:', query); // Add this line
         if (query.trim() !== '') {
           this.getMovies(query);
-        } else {
-          forkJoin([
-            // this.movieService.getPopular(),
-            // this.movieService.getMovie(),
-            this.movieService.getPopularr(1),
-            this.movieService.getPopularr(2),
-            this.movieService.getPopularr(3),
-            this.movieService.getPopularr(4),
-            this.movieService.getPopularr(5),
-            this.movieService.getPopularr(6),
-          ]).subscribe(([popularMovie1, popularMovie2, popularMovie3, popularMovie4, popularMovie5, popularMovie6]) => {
-          //   this.data = [...popularMovies.results,...allMovies.results]; is an array 
-            this.data = [
-              ...popularMovie1.results,
-              ...popularMovie2.results,
-              ...popularMovie3.results,
-              ...popularMovie4.results,
-              ...popularMovie5.results,
-              ...popularMovie6.results
-            
-            ];
-        });
-      }
+        }
+         
     });
 }
+
+fetchAllMovies() {
+  forkJoin([
+    this.movieService.getPopularr(1),
+    this.movieService.getTopRatedMovies(),
+    this.movieService.getUpcomingMovies()
+  ]
+    
+    ).subscribe(([popular1, toprated, upcomingMovies])=>{
+    this.data = [
+      ...popular1.results,
+      ...toprated.results,
+      ...upcomingMovies.results
+    ];
+  })
+}
+
+
+loadMovies(category: string) {
+  switch (category) {
+    case 'All':
+      this.fetchAllMovies();
+      break;
+    case 'Upcoming':
+      this.movieService.getUpcomingMovies().subscribe(data => this.data = data.results);
+      break;
+    case 'Popular':
+      this.movieService.getPopularr(1).subscribe(data => this.data = data.results);
+      break;
+    case 'Top Rated':
+      this.movieService.getTopRatedMovies().subscribe(data => this.data = data.results);
+      break;
+  }
+}
+
   getMovies(searchQuery: string): void {
-    // this.movieService.searchMovies(searchQuery).subscribe((movies: any) => {
-    //   this.data = movies.results;
-    //   // console.log(this.data);
-    // });
     this.movieService.searchMovies(searchQuery).subscribe(
       (movies: any) => {
-        this.errormessage = ''; // Clear any previous error message
         this.data = movies.results;
+        this.EmptyList = this.data.length === 0;
+        console.log(this.EmptyList);
       },
       (error: any) => {
         console.error('An error occurred while fetching movies:', error);
@@ -124,6 +104,7 @@ export class CardsComponent {
   
   goToMovieDetails(id: number) {
     this.router.navigate(['/details', id]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
  
 }
