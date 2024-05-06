@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this.pp.getIsLoggedIn();
-    console.log(this.isLoggedIn);
+    // console.log(this.isLoggedIn);
     if (this.isLoggedIn) {
       this.userEmail = this.pp.getLoggedInUserEmail();
     }

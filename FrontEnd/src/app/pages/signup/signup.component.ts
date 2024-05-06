@@ -66,12 +66,12 @@ export class SignupComponent {
     //we posting the value of the signup form to the json file
     this.http.post<any>("http://localhost:3000/signupUsersList/",this.signUp.value).subscribe(resp=>{
 //  once the data is posted it respond with sign up successful
-      console.log('sign up successful');
+      // console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
       this.userEmail = this.signUp.value.email;
       this.userLoggedIn = true;
       this.authsev.login(this.userEmail);
-      console.log(this.userEmail)
+      // console.log(this.userEmail)
       this.signUp.reset();
       this.signUp.reset()
       this.router.navigate(["login"])

@@ -37,10 +37,10 @@ export class CardsComponent {
   ngOnInit() {
     this.fetchAllMovies();
     this.isLoggedIn = this.auth.getIsLoggedIn();
-    console.log(this.isLoggedIn)
+    // console.log(this.isLoggedIn)
     if (this.isLoggedIn) {
       this.userEmail = this.auth.getLoggedInUserEmail();
-      console.log('User email'+this.userEmail)
+      // console.log('User email'+this.userEmail)
     }
     this.movieService.movieCategory$.subscribe(category => {
       this.loadMovies(category);
@@ -93,7 +93,7 @@ loadMovies(category: string) {
       (movies: any) => {
         this.data = movies.results;
         this.EmptyList = this.data.length === 0;
-        console.log(this.EmptyList);
+        // console.log(this.EmptyList);
       },
       (error: any) => {
         console.error('An error occurred while fetching movies:', error);

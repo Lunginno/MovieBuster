@@ -45,10 +45,10 @@ signInForm()
       this.UserLoggedIn = true;
       this.authsev.login(this.userEmail);
       this.watchlist.clearList();
-      console.log(this.userEmail)
+      // console.log(this.userEmail)
       this.signIn.reset();
       this.router.navigate(["home"])
-      console.log(this.UserLoggedIn);
+      // console.log(this.UserLoggedIn);
     }else{
       alert("user not found")
     }
