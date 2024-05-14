@@ -27,9 +27,16 @@ export class SignupComponent {
    //A form group is a collection of form controls
     this.signUp=this.formbuilder.group({
       //form control lets you input or output data in a specific field of your form.
-      email: new FormControl('',Validators.required),
-      password: new FormControl('',Validators.required),
+      email: new FormControl('',Validators.required,),
+      password: new FormControl('',Validators.compose([ 
+        Validators.maxLength(8), 
+        Validators.minLength(6),
+        Validators.required,
+        Validators.pattern ('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$'),
+      ]) ),
       cpassword: new FormControl('',Validators.required)
+      
+      
 
       //in the formgroup custom validator called checkpassword
     },{validator:this.checkPasswords });
