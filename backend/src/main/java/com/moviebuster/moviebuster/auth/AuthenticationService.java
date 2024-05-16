@@ -6,6 +6,7 @@ import com.moviebuster.moviebuster.entity.Role;
 import com.moviebuster.moviebuster.entity.Users;
 import com.moviebuster.moviebuster.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,4 +48,9 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }//for login
+
+
+//    public User findById(Long id) {
+//        return userRepo.findById(id).orElse(null);
+//    }
 }
