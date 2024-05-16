@@ -23,7 +23,8 @@ export class PpService {
   }
 
   getIsLoggedIn(): boolean {
-    return this.UserLoggedIn;
+    // return this.UserLoggedIn;
+    return true;
   }
 
   getLoggedInUserEmail(): string {

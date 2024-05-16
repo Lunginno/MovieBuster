@@ -12,17 +12,18 @@ import lombok.Setter;
 @Entity //Used to specify in Spring application an entity that will be used for the DB
 public class Movies {
 
+
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) //Method for the id
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Method for the id
     private Long id;
 
     private String title;
 
-    private String description;
+//    private String description;
 
-    private String genre;
-
-    private float movie_rating;
-
-    private String movie_date;
+//    private String genre;
+//
+//    private float movie_rating;
+//
+//    private String movie_date;
 }
