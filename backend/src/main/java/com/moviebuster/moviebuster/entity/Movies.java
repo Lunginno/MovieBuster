@@ -19,11 +19,11 @@ public class Movies {
 
     private String title;
 
-//    private String description;
+    private String description;
 
-//    private String genre;
-//
-//    private float movie_rating;
-//
-//    private String movie_date;
+    private String genre;
+
+    private float movie_rating;
+
+    private String movie_date;
 }

@@ -36,22 +36,19 @@ public class MovieController {
         movieService.saveMovie(movie);
     }
 
-//    @PostMapping("/{userId}/favorite")
-//    public void addToFavorite(@PathVariable Long userId, @RequestBody Movies movie){
-//        User user = userService.findById(userId);
-//        if (user != null) {
-//            user.getFavoriteMovies().add(movie);
-//            userService.saveUser(user);
-//        }
+    @GetMapping("/{id}")
+    public  Movies findOneById(@PathVariable Long id)
+    {
+        return  movieService.getMovieById(id);
+    }
+//    @PutMapping("/{id}")
+//    public void updateM(@PathVariable Long id,@RequestBody Movies movie)
+//    {
+//        this.movieService.updateMovies(id,movie);
 //    }
-//
-//    @DeleteMapping("/{userId}/favorite/{movieId}")
-//    public void removeFromFavorite(@PathVariable Long userId, @PathVariable Long movieId){
-//        User user = userService.findById(userId);
-//        if (user != null) {
-//            user.getFavoriteMovies().removeIf(m -> movieId.equals(m.getId()));
-//            userService.saveUser(user);
-//        }
-//    }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        this.movieService.DeleteMovie(id);
+    }
 
 }
