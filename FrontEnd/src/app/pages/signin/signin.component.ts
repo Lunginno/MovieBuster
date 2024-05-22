@@ -14,7 +14,7 @@ export class SigninComponent {
   //we use !: to tell the compiler that the formgroup is not null or undefined
 public signIn !: FormGroup
 public UserLoggedIn: boolean = false;
-  public userEmail: string = '';
+public userEmail: string = '';
 
 
 

@@ -1,7 +1,7 @@
 package com.moviebuster.moviebuster.repository;
 
-import com.moviebuster.moviebuster.entity.Movies;
+import com.moviebuster.moviebuster.entity.FavMovies;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MovieRepo extends JpaRepository<Movies, Long> {
+public interface FavMovieRepo extends JpaRepository<FavMovies, Long> {
 }

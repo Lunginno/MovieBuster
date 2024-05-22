@@ -1,16 +1,15 @@
 package com.moviebuster.moviebuster.service;
 
 
-import com.moviebuster.moviebuster.entity.Movies;
+import com.moviebuster.moviebuster.entity.FavMovies;
 
 import java.util.List;
 
-public interface MovieService {
+public interface FavMovieService {
 
     // its getting all the movies from the api/database
-    List<Movies> getAllMovies();
-    void saveMovie(Movies movie);
-    Movies  getMovieById(Long id);
-    void DeleteMovie(Long id);
-//    void saveMovies(Movies movie);
+    List<FavMovies> getAllMovies();
+    public void saveMovie(FavMovies movie, Integer userId);
+    FavMovies getFavMovieById(Long id);
+    void deleteFavMovie(Long id);
 }
