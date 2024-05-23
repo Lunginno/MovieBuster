@@ -29,10 +29,10 @@ export class SignupComponent {
       //form control lets you input or output data in a specific field of your form.
       email: new FormControl('',Validators.required,),
       password: new FormControl('',Validators.compose([ 
-        Validators.maxLength(8), 
-        Validators.minLength(6),
         Validators.required,
-        Validators.pattern ('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$'),
+        Validators.maxLength(8), 
+        //Validators.minLength(6),
+        Validators.pattern ('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^/&\\\\]).{6,}$'),
       ]) ),
       cpassword: new FormControl('',Validators.required)
       

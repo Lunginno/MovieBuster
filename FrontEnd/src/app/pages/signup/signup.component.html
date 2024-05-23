@@ -15,8 +15,16 @@
       <label for="password">Password:</label>
       <input type="password" formControlName="password" class="form-control"  id="password" placeholder="password" >
     </div>
-     <div class="error" *ngIf="signUp.get('password')?.hasError('required')&& signUp.get('password')?.touched">Password is required </div>
-     
+           <div class="error" *ngIf="signUp.get('password')?.hasError('required')&& signUp.get('password')?.touched">Password is required </div>
+            <div *ngIf="signUp.get('password')?.hasError('pattern')">
+             Password must be at least 6 characters long.
+            </div>
+           <div *ngIf="signUp.get('password')?.hasError('pattern')">
+             Password cannot be longer than 8 characters.
+            </div>
+    <div *ngIf="signUp.get('password')?.hasError('pattern')">
+      Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character (excluding /, &, \).
+    </div>
     <div class="cpass" >
       <label for="password">Confirm Password:</label>
       <input type="password" formControlName="cpassword" class="form-control"  id="cpassword" placeholder="password">
@@ -24,7 +32,7 @@
     <div class="error" *ngIf="signUp.get('cpassword')?.hasError('required')&& signUp.get('cpassword')?.touched"> Confirm Password is required </div>
     <div class="error" *ngIf="signUp.hasError('passwordMismatch') && signUp.get('cpassword')?.touched">Password do not match</div>
     <br>
-    <button type="submit" [disabled]="signUp.invalid" >SIGN UP</button><br>
+    <button  routerLink="/home" type="submit" [disabled]="signUp.invalid" >SIGN UP</button><br>
     <p>Already have an accout?   <a routerLink="/login">Sign In</a> </p>
   </form>
 </div>
