@@ -10,7 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -21,7 +23,6 @@ import java.util.List;
 @Table(name = "users")
 public class Users implements UserDetails {
 
-
     @Id
     @GeneratedValue
     private Integer id;
@@ -30,13 +31,15 @@ public class Users implements UserDetails {
 
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private Set<FavMovies> favMovies;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-   @Override
-   public Collection<? extends GrantedAuthority> getAuthorities() {
-     return List.of(new SimpleGrantedAuthority(role.name()));
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

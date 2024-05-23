@@ -35,7 +35,7 @@ public class FavMovieServiceImpl implements FavMovieService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
         // Set the user for the movie
-        movie.setUser(user);
+//        movie.setUser(user);
 
         // Save the movie
         FavMovieRepo.save(movie);
