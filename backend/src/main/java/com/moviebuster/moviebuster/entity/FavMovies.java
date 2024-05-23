@@ -1,6 +1,8 @@
 package com.moviebuster.moviebuster.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
+import jdk.jfr.TransitionTo;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,13 +12,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 @Data
+@Transactional
 @Getter //Annotation used to create getters methods for our variables
 @Setter //Annotation used to create setters methods for our variables
 @Entity //Used to specify in Spring application an entity that will be used for the DB
 @Table(name = "fav_movies")
 public class FavMovies {
 
-//    @GeneratedValue(strategy = GenerationType.IDENTITY) //Method for the id
+    @GeneratedValue(strategy = GenerationType.AUTO) //Method for the id
+    @Column(name = "id")
     @Id
     private Long id;
 
@@ -30,11 +34,15 @@ public class FavMovies {
 
     private String movie_date;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
 
 //     Define foreign key relationship with Users table
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "user_id")
-        private Users user;
+//        @ManyToOne(fetch = FetchType.EAGER)
+//        @JoinColumn(name = "user_id")
+//        private Users user;
+
 
 //    @OneToMany(mappedBy = "fav_movies")
 //    private Set<Users> users ;

@@ -1,6 +1,7 @@
 package com.moviebuster.moviebuster.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @Data
 @Builder
+@Transactional
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -24,15 +26,23 @@ import java.util.Set;
 public class Users implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
 
     private String email;
 
     private String password;
 
-    @OneToMany(mappedBy = "user")
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Set<FavMovies> favMovies;
+
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<FavMovies> favMovies;
+
 
     @Enumerated(EnumType.STRING)
     private Role role;

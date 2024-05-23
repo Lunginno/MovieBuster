@@ -1,5 +1,6 @@
 package com.moviebuster.moviebuster.controller;
 
+import com.moviebuster.moviebuster.entity.Users;
 import com.moviebuster.moviebuster.repository.FavMovieRepo;
 import com.moviebuster.moviebuster.repository.UserRepo;
 //import org.springframework.web.bind.annotation.;
@@ -7,6 +8,7 @@ import com.moviebuster.moviebuster.auth.AuthenticationService;
 import com.moviebuster.moviebuster.entity.FavMovies;
 import com.moviebuster.moviebuster.service.FavMovieService;
 import com.moviebuster.moviebuster.service.FavMovieServiceImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,10 +37,24 @@ public class FavMovieController {
     }
 
 
+//    @PostMapping
+//    public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId){
+//        movieService.saveMovie(movie, userId);
+//    }
+
     @PostMapping
     public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId){
+        // Fetch the user object based on the user ID
+        Users user = userRepo.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Associate the movie with the user
+//        movie.setUser(user);
+
+        // Save the movie
         movieService.saveMovie(movie, userId);
     }
+
 
     @GetMapping("/{id}")
     public FavMovies findOneById(@PathVariable Long id)

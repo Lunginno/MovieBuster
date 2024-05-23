@@ -5,6 +5,7 @@ import com.moviebuster.moviebuster.config.JwtService;
 import com.moviebuster.moviebuster.entity.Role;
 import com.moviebuster.moviebuster.entity.Users;
 import com.moviebuster.moviebuster.repository.UserRepo;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,7 +50,15 @@ public class AuthenticationService {
                 .build();
     }//for login
 
+    public Users getUserWithFavMovies(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 
+    public Users getUserById(Long id) {
+        return repository.findById(Math.toIntExact(id))
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
 //    public User findById(Long id) {
 //        return userRepo.findById(id).orElse(null);
 //    }
