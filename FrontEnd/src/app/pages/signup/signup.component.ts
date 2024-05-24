@@ -50,21 +50,21 @@ export class SignupComponent {
 
   signup()
   {
-    //check if the signup form is invalid
-    if(this.signUp.invalid)return;
-    //getting the email value from the form
-    const userEmail=this.signUp.get('email')?.value;
-    //email as a query parameter(is a way to pass data between web pages)
-    this.http.get<any>(`http://localhost:3000/signupUsersList/?email=${userEmail}`).subscribe(existingUser => {
-    //checks if the response from the server contains any existing user data. 
-    if (existingUser.length > 0) {
-        // Email already exists, inform the user and prevent signup
-        alert('Email already registered.');
-      } else {
+    // //check if the signup form is invalid
+    // if(this.signUp.invalid)return;
+    // //getting the email value from the form
+    // const userEmail=this.signUp.get('email')?.value;
+    // //email as a query parameter(is a way to pass data between web pages)
+    // this.http.get<any>(`http://localhost:8080/api/v1/auth//?email=${userEmail}`).subscribe(existingUser => {
+    // //checks if the response from the server contains any existing user data. 
+    // if (existingUser.length > 0) {
+    //     // Email already exists, inform the user and prevent signup
+    //     alert('Email already registered.');
+    //   } else {
 
     
     //we posting the value of the signup form to the json file
-    this.http.post<any>("http://localhost:3000/signupUsersList/",this.signUp.value).subscribe(resp=>{
+    this.http.post<any>("http://localhost:8080/api/v1/auth/register",this.signUp.value).subscribe(resp=>{
 //  once the data is posted it respond with sign up successful
       // console.log('sign up successful');
       //the navigator method accepts an array of route as an argument
@@ -80,9 +80,10 @@ export class SignupComponent {
         alert("something went wrong");
 
     });
-    }})
+    }}
+  // )
   
-  }
+//   }
 
 
-}
+// }
