@@ -1,0 +1,42 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- <img [src]="movie.backdrop_path" alt="Movie Poster"> -->
+      <!-- Assuming you have the path stored in a variable or directly inputting it for demonstration -->
+     <!-- <img src="https://image.tmdb.org/t/p/w500/cxevDYdeFkiixRShbObdwAHBZry.jpg" alt="Movie Poster"> -->
+      <img [src]="getMovieImageUrl(movie.backdrop_path)" alt="movie.title">
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h1 class="card-title">{{ movie.original_title }}</h1>
+        <h4 class="card-text">{{ movie.overview }}</h4>
+        <div>
+          <h5>IMDB RATING: {{ movie.vote_average }}</h5>
+        </div>
+        <div>
+          <!-- use addedToWatchlist after the login is done-->
+          <button (click)="addToList(movie)">{{ movie.addedToWatchlist ? 'Added' : 'Add to watchlist' }}</button>
+        </div>
+        
+        <!-- <p>{{ movie.genres[0].name }}, {{ movie.genres[1].name }}, {{ movie.genres[2].name }}</p> -->
+        <!-- <div *ngFor="let item of movie.genres" class="pstyle">
+          <p> {{ item.name }}</p>
+        </div> -->
+        <!-- <p>{{ movie.vote_average }}</p> -->
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+<br>
+<br>
+<div class="more">
+  <h2>
+    More movies >
+  </h2>
+</div>
+
+<app-cards></app-cards>

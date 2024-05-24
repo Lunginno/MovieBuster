@@ -1,0 +1,63 @@
+h2{
+    font-weight: bolder;
+    text-align: center;
+}
+.container{
+    border: 1px ; 
+    background-color: #45A29E;
+    border-radius: 30px;
+    padding: 20px;
+    width: 350px;
+    height: 450px;
+    color: #f4f2f2;
+    margin-top: 100px;
+
+}
+.Signup{
+    padding: 7px;
+    margin: 5px;
+    font-weight: bold;
+    
+}
+button{
+    background-color: #66FCF1;
+    border-radius: 15px;
+    width: 90px;
+    height: 40px;
+    border-color: solid 1px #66FCF1;
+    color: rgba(0, 0, 0, 0.559); /* Add text color */
+    font-size: 16px; /* Add font size */
+    // font-weight: bold; /* Add font weight */
+    cursor: pointer;
+    border: 1px ; 
+
+}
+button:hover {
+    background-color: #00ffee9a; /* Change color on hover */
+    border-color: solid 1px #000000;
+}
+.email{
+    padding: 5px;
+    border-radius: 15px;
+}
+.pass{
+    padding: 5px;
+    border-radius: 15px;
+}
+.cpass{
+    padding: 5px;
+    border-radius: 15px;
+}
+.error{
+    color: rgb(120, 16, 16);
+    text-emphasis: none;
+    text-decoration: none;
+    font-weight: 400;
+}
+small{
+    color: rgb(120, 16, 16);
+}
+input::placeholder {
+    color: #f0efef;
+    text-decoration-color: azure;
+}

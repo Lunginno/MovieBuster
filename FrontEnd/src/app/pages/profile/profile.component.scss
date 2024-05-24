@@ -1,0 +1,70 @@
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    color: aliceblue;
+    
+    
+    
+}
+
+.profile-info
+{
+    display: absolute;
+    width: 24px;
+	text-align: center;
+    padding: 0;
+    width: 30%;
+   
+
+}
+
+.Userinfo{
+    text-align:center;
+    align-items: center;
+    
+}
+
+.btn-p
+{
+    text-align:left;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    background-color: #67b1ac;
+    width: 75%;
+   color: black;
+   
+   
+    
+}
+
+.btn-primary{
+   
+    border-radius: 30px;
+    margin-bottom: 10px;
+    background-color:#67b1ac;
+    width: 35%;
+    color: black;
+    text-align: left;
+
+}
+.bi-person-circle
+{
+    max-width: 50%;
+    color: #67b1ac;
+    background-color: white;
+    border-radius: 190px;
+        
+}
+p{
+    text-align: center;
+    height: 30px;
+    padding-top: 12px;
+}
+body{
+    background-image: "https://t4.ftcdn.net/jpg/02/71/50/69/360_F_271506927_WWFfd92jDIIDx6DgMflakU14o5jRPgBm.jpg";
+}
+
+
+

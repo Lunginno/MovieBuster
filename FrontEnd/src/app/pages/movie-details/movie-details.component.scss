@@ -1,0 +1,94 @@
+
+.container{
+        // margin-top: 10%;
+        width: 100%;
+        margin-top: 20px;
+      
+    .col-md-4{
+        padding-left: 0%;
+    }
+
+    .row{
+        //    width: 90%;
+        border: solid 0.1px rgb(0, 0, 0);
+        background-color: #D9D9D9;
+        margin-left: 0%;
+        margin-right: 0%;
+        height: 100%;
+        border-radius: 10px; 
+
+    }
+    img{
+        /* KungFuHustleHKposter 1 */
+        box-sizing: border-box;
+        position:left;
+        width: 100%;
+        border-radius: 10px;
+        height: 100%;
+        // border: 1px solid #000000;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
+        mask-image: linear-gradient(to right, black 50%, transparent 100%);
+
+    }
+    .col-md-8{
+        .card-body{
+            background-color: #D9D9D9;
+            
+            button{
+                /* 🦆 icon "bookmark" */
+                padding: .8em 5.99em;
+                background-color: aqua;
+                filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.09));
+                margin-bottom: .9em; 
+                border: solid 1px #afafaf;
+
+            }
+            h5{
+                margin-bottom: .9em; 
+                margin-left: 0.2em;
+            }
+            .card-title{
+            /* KUNG FU HUSTLE */
+
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 5em;
+                line-height: 61px;
+                /* identical to box height */
+                color: #000000;
+                margin-bottom: .2em;
+                margin-top: 0.6em; 
+            }
+            .card-text{
+                /* Po is gearing up to become the spiritual leader of his Valley of Peace, but also needs someone to take his place as Dragon Warrior. As such, he will train a new kung fu practitioner for the spot and will encounter a villain called the Chameleon who conjures villains from the past. */
+
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 200;
+                font-size: 28px;
+                line-height: 46px;
+                color: #000000;
+                margin-bottom: .9em; 
+                margin-left: 0.2em;
+                margin-right: 0.9em;
+
+            }
+            p{
+                margin-bottom: 0.9em;
+                margin-right: 0.9em;
+            }
+            .pstyle{
+                // clear: both;
+                display: inline-block;
+                // overflow: hidden;
+                // white-space: nowrap;
+            }
+        }
+    }
+}
+.more{
+    color: rgba(240, 248, 255, 0.73);
+    padding-left: 4em;
+}
