@@ -19,6 +19,9 @@
           <!-- use addedToWatchlist after the login is done-->
           <button (click)="addToList(movie)">{{ movie.addedToWatchlist ? 'Added' : 'Add to watchlist' }}</button>
         </div>
+        <div>
+          <button (click)="addToFavorites()">Favourites</button>
+        </div>
         
         <!-- <p>{{ movie.genres[0].name }}, {{ movie.genres[1].name }}, {{ movie.genres[2].name }}</p> -->
         <!-- <div *ngFor="let item of movie.genres" class="pstyle">
