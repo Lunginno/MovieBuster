@@ -32,7 +32,7 @@ public class WatchlistServiceImplementation implements WatchlistService{
 
         Users user = userRepo.findById(userId)
         .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        Watchlist.save(movie);
+        watchlistRepo.save(movie);
     }
 
     @Override

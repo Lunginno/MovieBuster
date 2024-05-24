@@ -49,7 +49,7 @@ public class WatchlistController {
     @PostMapping
     public void saveMovie(@RequestBody Watchlist watchlist, @RequestParam Integer userId){
 
-        Users user = watchlistRepo.findById(userId)
+        Users user = userRepo.findById(userId)
         .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         watchserviceImplement.saveMovie(watchlist, userId);
