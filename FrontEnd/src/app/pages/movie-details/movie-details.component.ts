@@ -32,6 +32,7 @@ export class MovieDetailsComponent implements OnInit {
         error: (err) => console.error(err)
       });
     });
+  
 
   }
   getMovieImageUrl(path: string): string {

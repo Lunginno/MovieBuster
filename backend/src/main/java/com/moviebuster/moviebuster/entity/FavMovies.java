@@ -26,7 +26,7 @@ public class FavMovies {
 
     private String title;
 
-    private String description;
+    private String backdrop_path;
 
     private String genre;
 
