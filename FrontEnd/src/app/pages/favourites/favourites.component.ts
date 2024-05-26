@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FavouriteService } from 'src/app/services/favourite/favourite.service';
@@ -23,8 +24,8 @@ export class FavouritesComponent implements OnInit {
         this.data = response;
         console.log('Favorite movies:', this.data);
       },
-      (error) => {
-        console.error('Error fetching favorite movies:', error);
+      (error: HttpErrorResponse) => {
+        console.error('Error fetching favorite movies:', error.error.message);
       }
     );
   }

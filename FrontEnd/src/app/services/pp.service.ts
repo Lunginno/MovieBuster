@@ -1,69 +1,87 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, SubjectLike, catchError, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PpService {
-  private   UserLoggedIn: boolean = false;
+  private UserLoggedIn: boolean = false;
   private loggedInEmail: string = '';
+  private userId: number | null = null; // Add a userId field
   private token: string | null = null;
   authChanged = new Subject<boolean>();
 
-private authStatusListener = new BehaviorSubject<boolean>(false);
+  private authStatusListener = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor() {
+    this.initAuth();
+  }
+
   login(email: string, token: string): void {
-
     this.UserLoggedIn = true;
     this.token = token;
     this.loggedInEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
-    localStorage
-    this.authChanged.next(true);
+    localStorage.setItem('token', token); // Store the token in localStorage
+    this.userId = this.extractUserIdFromToken(token); // Extract and store the user ID
+    this.authStatusListener.next(true);
   }
-  
+
   logout(): void {
     this.UserLoggedIn = false;
     this.loggedInEmail = '';
+    this.token = null;
+    this.userId = null; // Clear the user ID
     localStorage.removeItem('loggedInUserEmail');
+    localStorage.removeItem('token'); // Remove the token from localStorage
+    this.authStatusListener.next(false);
   }
 
-  // Method to retrieve the token
   getToken(): string | null {
     return this.token;
   }
 
-  // Method to check if the user is authenticated
   isAuthenticated(): boolean {
     return !!this.token; // Returns true if token is not null or undefined
   }
 
-  // Method to get the authentication status listener as an observable
   getAuthStatusListener(): Observable<boolean> {
     return this.authStatusListener.asObservable();
   }
 
-  // Method to check if the user is logged in
   getIsLoggedIn(): boolean {
     return this.UserLoggedIn;
-    // return true;
   }
 
-  // Method to get the logged-in user's email
   getLoggedInUserEmail(): string {
     return this.loggedInEmail;
   }
 
-  // Method to initialize authentication state from local storage
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
     const token = localStorage.getItem('token');
     if (userEmail && token) {
-      this.login(userEmail, token);
+      this.UserLoggedIn = true;
+      this.loggedInEmail = userEmail;
+      this.token = token;
+      this.userId = this.extractUserIdFromToken(token); // Extract and store the user ID
+      this.authStatusListener.next(true);
     } else {
       console.log('No token found in local storage.');
+    }
+  }
+
+  getUserId(): number | null {
+    return this.userId;
+  }
+
+  private extractUserIdFromToken(token: string): number | null {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.id || null; // Assuming the user ID is stored in the "id" field
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
     }
   }
 }

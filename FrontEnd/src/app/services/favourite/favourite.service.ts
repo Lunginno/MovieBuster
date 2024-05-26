@@ -1,72 +1,79 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { PpService } from '../pp.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavouriteService {
-  private apiUrl = 'http://localhost:8080/api/v1/auth/movies/favourite'
-  // private favourites: any[] = [];
-  data: any[]=[];
+  private apiUrl = 'http://localhost:8080/api/v1/auth/movies/favourite';
   favouritesMovies: any[] = [];
+  userId: number | null = null;
 
-  constructor(private http: HttpClient) { }
-
-  ngOnit(){
+  constructor(private http: HttpClient, private auth: PpService) {
+    this.auth.getAuthStatusListener().subscribe(isAuthenticated => {
+      this.userId = this.auth.getUserId();
+    });
     this.getFavourites().subscribe(favourites => {
       this.favouritesMovies = favourites;
     });
   }
 
   getFavourites(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const userId = this.userId;
+    console.log(userId)
+    return this.http.get<any[]>(`${this.apiUrl}/user/${userId}`).pipe(
+      catchError((error: HttpClient)=>{
+        return throwError(error);
+        
+      })
+    );
+    // return this.http.get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}&page=${page}`);
   }
 
+  addToFavorites(movie: any) {
+    const userId = this.userId;
+    if (!userId) {
+      console.error('User ID is missing.');
+      return;
+    }
 
-addToFavorites(movie: any) {
-  if (!this.favouritesMovies.includes(movie)) {
-      this.favouritesMovies.push(movie);
-      movie.addedToWatchlist = true;
-      const userId = 1;
-      // Extract necessary details from the movie object
+    // if (!this.favouritesMovies.includes(movie)) {
+      // this.favouritesMovies.push(movie);
+      // movie.addedToWatchlist = true;
       const { id, title, backdrop_path, genre, vote_average, release_date } = movie;
 
-      // Construct the payload in the desired format
       const payload = {
-          id,
-          title,
-          backdrop_path, // Assuming overview corresponds to description
-          genre,
-          movie_rating: vote_average, // Assuming vote_average corresponds to movie_rating
-          movie_date: release_date, // Assuming release_date corresponds to movie_date
-          user: {
-            id: userId
+        id,
+        title,
+        backdrop_path,
+        genre,
+        movie_rating: vote_average,
+        movie_date: release_date,
+        user: {
+          id: userId
         }
       };
-      console.log('https://image.tmdb.org/t/p/w370_and_h556_bestv2/'+ backdrop_path)
 
-      if (userId) {
-          // Make a POST request to the API with the user ID as a query parameter
-          this.http.post(`http://localhost:8080/api/v1/auth/movies/favourite?userId=${userId}`, payload)
-              .subscribe(
-                  response => {
-                      console.log('Movie added successfully:', response);
-                  },
-                  error => {
-                      console.error('Error adding movie:', error);
-                  }
-              );
-      } else {
-          console.error('User ID is missing.');
-      }
-  } else {
-      alert('Movie already added');
-      movie.addedToWatchlist = true;
+      
+
+      this.http.post(`${this.apiUrl}?userId=${userId}`, payload)
+        .subscribe(
+          response => {
+            console.log('Movie added successfully:', response);
+          },
+          error => {
+            console.error('Error adding movie:', error);
+          }
+        );
+        
+    // } else {
+    //   alert('Movie already added');
+    //   movie.addedToWatchlist = true;
+    // }
   }
-}
-
 
   removeFromFavorites(movie: any): Observable<any> {
     const index = this.favouritesMovies.findIndex(fav => fav.id === movie.id);
