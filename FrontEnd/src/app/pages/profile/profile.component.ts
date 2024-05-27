@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PpService } from 'src/app/services/pp.service';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -9,10 +10,11 @@ import { PpService } from 'src/app/services/pp.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
   isLoggedIn: boolean = false;
   userEmail: string = '';
 
-  constructor(private http: HttpClient,private pp:PpService) {}
+  constructor(private http: HttpClient,private pp:PpService, private router:Router) {}
 
   ngOnInit() {
     this.isLoggedIn = this.pp.getIsLoggedIn();
@@ -21,6 +23,10 @@ export class ProfileComponent implements OnInit {
       this.userEmail = this.pp.getLoggedInUserEmail();
     }
   
+  }
+
+  navigateToFavorites(): void {
+    this.router.navigate(['/favourite']);
   }
   logout(): void {
     this.pp.logout();

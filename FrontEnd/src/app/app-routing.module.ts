@@ -9,6 +9,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { FavouritesComponent } from './pages/favourites/favourites.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'details/:id' , component:MovieDetailsComponent},
   {path:'nav' , component:NavBarComponent},
   {path: 'cards', component:CardsComponent},
+  {path: 'favourite',component: FavouritesComponent},
   // {path: 'dashboard' , component:DashboardComponent},
   {path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, 
   {path: 'details/:id', component: MovieDetailsComponent },

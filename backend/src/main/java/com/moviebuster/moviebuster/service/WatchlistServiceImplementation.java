@@ -50,9 +50,20 @@ public class WatchlistServiceImplementation implements WatchlistService{
         return watchlist;
     }
 
+    @Override //
+    public List<Watchlist> getWatchlistMovieById(Integer userId){
+        return watchlistRepo.findByUserId(userId);
+    }
+
     @Override
     public void deleteWatchlistMovie(Long id){
         this.watchlistRepo.deleteById(id);
+    }
+
+    //Soft Delete
+    @Override
+    public void deleteWatchlistMovieById(Integer id){
+        watchlistRepo.softDeleteById(id);
     }
 
 }

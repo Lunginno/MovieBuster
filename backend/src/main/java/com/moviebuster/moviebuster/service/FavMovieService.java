@@ -11,5 +11,7 @@ public interface FavMovieService {
     List<FavMovies> getAllMovies();
     public void saveMovie(FavMovies movie, Integer userId);
     FavMovies getFavMovieById(Long id);
+    List<FavMovies> getMoviesByUserId(Integer userId);
+    List<FavMovies> getMoviesByTitle(String title);
     void deleteFavMovie(Long id);
 }

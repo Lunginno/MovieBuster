@@ -30,6 +30,8 @@ public class FavMovieServiceImpl implements FavMovieService {
 //    }
     @Override
     public void saveMovie(FavMovies movie, Integer userId) {
+
+
         // Get the user object based on userId
         Users user = userRepo.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
@@ -54,6 +56,15 @@ public class FavMovieServiceImpl implements FavMovieService {
         }
 
         return favMovie;
+    }
+    @Override
+    public List<FavMovies> getMoviesByUserId(Integer userId) {
+        return FavMovieRepo.findByUserId(userId);
+    }
+
+    @Override
+    public List<FavMovies> getMoviesByTitle(String title) {
+        return FavMovieRepo.findByTitle(title);
     }
 
     @Override
