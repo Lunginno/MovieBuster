@@ -1,7 +1,6 @@
-import { group } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import {  FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PpService } from 'src/app/services/pp.service';
 
@@ -11,11 +10,17 @@ import { PpService } from 'src/app/services/pp.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-  public signUp !: FormGroup;
+  public signUp!: FormGroup;
   public userLoggedIn: boolean = false;
   public userEmail: string = '';
+  public emailExistsError: boolean = false;
 
-  constructor(private formbuilder: FormBuilder, private http: HttpClient, private router: Router, private authsev: PpService) {}
+  constructor(
+    private formbuilder: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private authsev: PpService
+  ) {}
 
   ngOnInit(): void {
     this.signUp = this.formbuilder.group({
@@ -40,33 +45,65 @@ export class SignupComponent {
     }
   }
   newUsers = 0;
+//   signup() {
+//     if (this.signUp.invalid) return;
+
+//     const userEmail = this.signUp.get('email')?.value;
+
+//     // Check if the user already exists
+//     // this.http.get<any>(`http://localhost:8080/api/v1/auth/register/?email=${userEmail}`).subscribe(existingUser => {
+//     //   if (existingUser.length > 0) {
+//     //     alert('Email already registered.');
+//     //   } else {
+//         // If user doesn't exist, proceed with signup
+//         let newUser = this.signUp.value;
+//         newUser['id'] = this.newUsers+1;
+
+
+//         this.http.post<any>("http://localhost:8080/api/v1/auth/register", newUser).subscribe(resp => {
+//           console.log(this.userEmail);
+          
+//           this.userEmail = this.signUp.value.email;
+//           this.userLoggedIn = true;
+//           // this.authsev.login(this.userEmail);
+//           this.signUp.reset();
+//           this.router.navigate(["home"]);
+//         }, error => {
+//           alert("Something went wrong");
+//         });
+//       }
+//   //   });
+//   // }
+// }
+  
   signup() {
     if (this.signUp.invalid) return;
 
     const userEmail = this.signUp.get('email')?.value;
-
-    // Check if the user already exists
-    // this.http.get<any>(`http://localhost:8080/api/v1/auth/register/?email=${userEmail}`).subscribe(existingUser => {
-    //   if (existingUser.length > 0) {
-    //     alert('Email already registered.');
-    //   } else {
-        // If user doesn't exist, proceed with signup
-        let newUser = this.signUp.value;
-        newUser['id'] = this.newUsers+1;
-
-
-        this.http.post<any>("http://localhost:8080/api/v1/auth/register", newUser).subscribe(resp => {
-          console.log(this.userEmail);
+    this.http.get<any>(`http://localhost:8080/api/v1/auth/check-email?email=${userEmail}`).subscribe(
+      (response) => {
+        if (response.exists) {
+          alert('user exists')
+          this.emailExistsError = true;
           
-          this.userEmail = this.signUp.value.email;
-          this.userLoggedIn = true;
-          // this.authsev.login(this.userEmail);
-          this.signUp.reset();
-          this.router.navigate(["home"]);
-        }, error => {
-          alert("Something went wrong");
-        });
+        } else {
+          this.http.post<any>("http://localhost:8080/api/v1/auth/register", this.signUp.value).subscribe(
+            (resp) => {
+              this.userEmail = this.signUp.value.email;
+              this.userLoggedIn = true;
+              // this.authsev.login(this.userEmail);
+              this.signUp.reset();
+              this.router.navigate(["login"]);
+            },
+            (error) => {
+              alert("Something went wrong");
+            }
+          );
+        }
+      },
+      (error) => {
+        alert("Something went wrong");
       }
-  //   });
-  // }
+    );
+  }
 }
