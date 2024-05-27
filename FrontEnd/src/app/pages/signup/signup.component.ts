@@ -25,11 +25,7 @@ export class SignupComponent {
   ngOnInit(): void {
     this.signUp = this.formbuilder.group({
       email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.compose([ 
-        Validators.required,
-        Validators.maxLength(8), 
-        Validators.pattern ('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^/&\\\\]).{6,}$'),
-      ])),
+      password: new FormControl('', Validators.required),
       cpassword: new FormControl('', Validators.required)
     }, { validator: this.checkPasswords });
   }
@@ -38,44 +34,9 @@ export class SignupComponent {
     const password = formgroup.get('password')?.value;
     const cpassword = formgroup.get('cpassword')?.value;
 
-    if (password === cpassword) {
-      return null; // Passwords match
-    } else {
-      return { passwordMismatch: true }; // Passwords don't match
-    }
+    return password === cpassword ? null : { passwordMismatch: true };
   }
-  newUsers = 0;
-//   signup() {
-//     if (this.signUp.invalid) return;
 
-//     const userEmail = this.signUp.get('email')?.value;
-
-//     // Check if the user already exists
-//     // this.http.get<any>(`http://localhost:8080/api/v1/auth/register/?email=${userEmail}`).subscribe(existingUser => {
-//     //   if (existingUser.length > 0) {
-//     //     alert('Email already registered.');
-//     //   } else {
-//         // If user doesn't exist, proceed with signup
-//         let newUser = this.signUp.value;
-//         newUser['id'] = this.newUsers+1;
-
-
-//         this.http.post<any>("http://localhost:8080/api/v1/auth/register", newUser).subscribe(resp => {
-//           console.log(this.userEmail);
-          
-//           this.userEmail = this.signUp.value.email;
-//           this.userLoggedIn = true;
-//           // this.authsev.login(this.userEmail);
-//           this.signUp.reset();
-//           this.router.navigate(["home"]);
-//         }, error => {
-//           alert("Something went wrong");
-//         });
-//       }
-//   //   });
-//   // }
-// }
-  
   signup() {
     if (this.signUp.invalid) return;
 
