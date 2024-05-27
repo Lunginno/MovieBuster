@@ -9,6 +9,11 @@ public interface WatchlistService {
     List<Watchlist> geWatchlists();
     public void saveMovie (Watchlist movie, Integer userId);
     Watchlist getWatchlistById(Long id);
+
+    List<Watchlist> getMovieTitle(String title);
+
+    void deleteWatchlistMovieById(Long id);
+
     void deleteWatchlistMovie(Long id);
 
     List<Watchlist> getWatchlistMovieById(Integer id); //posting the watchlist item by id user_id

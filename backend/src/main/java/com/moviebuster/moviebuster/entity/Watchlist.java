@@ -34,31 +34,28 @@ public class Watchlist {
 
     private String relDate;
 
-    //Soft delete start here
-    @Column(name ="is_Deleted")
-    private boolean isDeleted = false;
-    //End of soft delete
+    private float movie_rating;
+
+//    //Soft delete start here
+//    @Column(name ="is_Deleted")
+//    private boolean isDeleted = false;
+//    //End of soft delete
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    private FavMovies movie;
 
 
-    //Getters and Setters for soft delete
-    public boolean isDeleted() {
-        return isDeleted;
-    }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
+//    //Getters and Setters for soft delete
+//    public boolean isDeleted() {
+//        return isDeleted;
+//    }
+//
+//    public void setDeleted(boolean deleted) {
+//        isDeleted = deleted;
+//    }
 
-    // public static void save(Watchlist movie2) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'save'");
-    // }
+
 }

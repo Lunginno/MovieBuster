@@ -45,6 +45,13 @@ public class WatchlistController {
         Users user = userRepo.findById(userId)
         .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
+//        List<Watchlist> existingMovies = watchserviceImplement.getMovieTitle(watchserviceImplement.getMovieTitle());
+//
+//        if (!existingMovies.isEmpty()) {
+//            throw new RuntimeException("Movie with the title '" + watchserviceImplement.getMovieTitle() + "' already exists");
+//        }
+
+
         watchserviceImplement.saveMovie(watchlist, userId);
     }
 
@@ -58,44 +65,11 @@ public class WatchlistController {
         this.watchlistRepo.deleteById(id);
     }
 
-    //Soft Delete
-    @DeleteMapping("softD/{id}")
-    public void deleteWatchlistMovieById(@PathVariable Integer id) {
-        watchserviceImplement.deleteWatchlistMovieById(id);
-    }
-
-
-
-    // @PostMapping("/{userId}/add/{movieId}")
-    // public void addToWatchlist (@PathVariable Integer userId, @PathVariable Long movieId){
-    //     //Find the user by using their id
-    //     Users user = userRepo.findById(userId)
-    //     .orElseThrow(() -> new IllegalArgumentException("This user was not foound"));
-
-    //     //create a new watchlist entry 
-    //     Watchlist watchlist = new Watchlist();
-    //     watchlist.setUser(user);
-
-    //     watchlist.setMovie(movieRepo.getOne(movieId));
-
-    //     watchlistRepo.save(watchlist);
-    // }
-
-    // @GetMapping("/{userId}")
-    // public List<Watchlist> getWatchlistByUserId (@PathVariable Long userId){
-    //     //Find the user by userId
-
-    //     Users user = userRepo.findById(userId)
-    //     .orElseThrow(() -> new IllegalArgumentException("User not found"));
-
-    //     //Retrieve the watchlist entries for the user
-    //     return user.getWatchlist();
-    // }
-
-    // @DeleteMapping("/{watchlistId}")
-    // public void removeFromWatchlist(@PathVariable Long watchlistId){
-    //     watchlistRepo.deletelById(watchlistId);
-    // }
+//    //Soft Delete
+//    @DeleteMapping("softD/{id}")
+//    public void deleteWatchlistMovieById(@PathVariable Integer id) {
+//        watchserviceImplement.deleteWatchlistMovieById(id);
+//    }
 
 
 

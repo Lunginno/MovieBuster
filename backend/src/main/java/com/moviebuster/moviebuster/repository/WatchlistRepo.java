@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface WatchlistRepo extends JpaRepository <Watchlist, Long>{
     List<Watchlist> findByUserId (Integer userId);
+    List<Watchlist> getMovieTitle(String title);
+//    //Soft delete elements
+//    List<Watchlist> findByUserIdAndIsDeletedFalse(Integer userId);
 
-    //Soft delete elements
-    List<Watchlist> findByUserIdAndIsDeletedFalse(Integer userId);
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE Watchlist w SET w.isDeleted = true WHERE w.id = :id")
-    void softDeleteById(Integer id);
+//    @Modifying
+//    @Transactional
+//    @Query("UPDATE Watchlist w SET w.isDeleted = true WHERE w.id = :id")
+//    void softDeleteById(Integer id);
 
 }

@@ -35,8 +35,8 @@ public class AuthenticationController {
         return service.getUserWithFavMovies(id);
     }
 
-    @GetMapping ("/api/v1/user-watchlist/{id}")
-        public Users getUserWithWatchlist(@PathVariable Integer id){
-        return service.geUserWithWatchlist(id);
-    }
+//    @GetMapping ("/api/v1/user-watchlist/{id}")
+//        public Users getUserWithWatchlist(@PathVariable Integer id){
+//        return service.geUserWithWatchlist(id);
+//    }
 }
