@@ -57,4 +57,9 @@ public class AuthenticationService {
         return repository.findById(Math.toIntExact(id))
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
+
+    public Users geUserWithWatchlist(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("user not found"));
+    }
 }
