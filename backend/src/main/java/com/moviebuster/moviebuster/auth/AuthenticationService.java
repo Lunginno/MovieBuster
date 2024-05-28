@@ -53,6 +53,11 @@ public class AuthenticationService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public Users getUserWithWatchlist(Integer id){
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     public Users getUserById(Long id) {
         return repository.findById(Math.toIntExact(id))
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));

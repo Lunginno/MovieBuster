@@ -36,17 +36,14 @@ public class Watchlist {
 
     private float movie_rating;
 
-//    //Soft delete start here
-//    @Column(name ="is_Deleted")
-//    private boolean isDeleted = false;
-//    //End of soft delete
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 
-
-
+//    //Soft delete start here
+//    @Column(name ="is_Deleted")
+//    private boolean isDeleted = false;
+//    //End of soft delete
 
 //    //Getters and Setters for soft delete
 //    public boolean isDeleted() {

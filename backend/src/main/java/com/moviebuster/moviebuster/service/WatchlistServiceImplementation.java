@@ -33,6 +33,8 @@ public class WatchlistServiceImplementation implements WatchlistService{
         Users user = userRepo.findById(userId)
         .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         watchlistRepo.save(movie);
+
+        movie.setUser(user);
     }
 
     @Override
@@ -50,26 +52,29 @@ public class WatchlistServiceImplementation implements WatchlistService{
         return watchlist;
     }
 
+    @Override
+    public List<Watchlist> getMoviesByUserId(Integer userId) {
+       return watchlistRepo.findByUserId(userId);
+    }
+
     @Override //
     public List<Watchlist> getWatchlistMovieById(Integer userId){
         return watchlistRepo.findByUserId(userId);
     }
 
     @Override
-    public void deleteWatchlistMovieById(Integer id) {
-
-    }
-
-    @Override
-    public List<Watchlist> getMovieTitle(String title){
-        return watchlistRepo.getMovieTitle(title);
-    }
-
-
-    @Override
     public void deleteWatchlistMovieById(Long id) {
         this.watchlistRepo.deleteById(id);
+
     }
+
+//    @Override
+//    public List<Watchlist> getMovieTitle(String title){
+//        return watchlistRepo.getMovieTitle(title);
+//    }
+
+
+
 
 
     @Override

@@ -2,6 +2,7 @@ package com.moviebuster.moviebuster.controller;
 
 import java.util.List;
 
+import com.moviebuster.moviebuster.entity.FavMovies;
 import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -42,28 +43,46 @@ public class WatchlistController {
     @PostMapping
     public void saveMovie(@RequestBody Watchlist watchlist, @RequestParam Integer userId){
 
-        Users user = userRepo.findById(userId)
-        .orElseThrow(() -> new EntityNotFoundException("User not found"));
-
-//        List<Watchlist> existingMovies = watchserviceImplement.getMovieTitle(watchserviceImplement.getMovieTitle());
+////        FavMovies existingMovies = movieService.getMoviesByTitle(movie.getTitle());
+//        List<FavMovies> existingMovies = movieService.getMoviesByTitle(movie.getTitle());
 //
-//        if (!existingMovies.isEmpty()) {
-//            throw new RuntimeException("Movie with the title '" + watchserviceImplement.getMovieTitle() + "' already exists");
+//        if (!existingMovies.isEmpty()){
+//            throw new RuntimeException("Movie with the title '" + movie.getTitle() + "' already exists");
 //        }
 
+        // Fetch the user object based on the user ID
+        Users user = userRepo.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Associate the movie with the user
+//        movie.setUser(user);
+        // Save the movie
 
         watchserviceImplement.saveMovie(watchlist, userId);
     }
+
+
+//    @GetMapping("/user/{userId}")
+//    public List<Watchlist> getW
+
+    @GetMapping("/user/{userId}")
+    public List<Watchlist> getMoviesByUserId(@PathVariable Integer userId) {
+        return watchserviceImplement.getMoviesByUserId(userId);
+    }
+
+
 
     @GetMapping("/{id}")
     public Watchlist findOneById(@PathVariable Long id){
         return watchserviceImplement.getWatchlistById(id);
     }
 
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         this.watchlistRepo.deleteById(id);
     }
+
 
 //    //Soft Delete
 //    @DeleteMapping("softD/{id}")
