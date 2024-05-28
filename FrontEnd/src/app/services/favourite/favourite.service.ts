@@ -62,6 +62,7 @@ export class FavouriteService {
       this.http.post(`${this.apiUrl}?userId=${userId}`, payload)
         .subscribe(
           response => {
+            alert("Added");
             console.log('Movie added successfully:', response);
           },
           error => {
@@ -75,21 +76,15 @@ export class FavouriteService {
     // }
   }
 
-  removeFromFavorites(movie: any): Observable<any> {
-    const index = this.favouritesMovies.findIndex(fav => fav.id === movie.id);
-    if (index !== -1) {
-      this.favouritesMovies.splice(index, 1);
-      return this.http.delete(`${this.apiUrl}/${movie.id}`).pipe(
-        catchError(error => {
-          console.error('Error removing movie from favorites:', error);
-          return of(null);
-        })
-      );
-    } else {
-      console.log('Movie not found in favorites');
-      return of(null);
-    }
-  }
+  removeFromFavorites(id: number): Observable<any> {
+    // event.stopPropagation();
+    return this.http.delete(`http://localhost:8080/api/v1/auth/movies/favourite/${id}`)
+   .pipe(
+      catchError((error: HttpClient)=>{
+        return throwError(error);
+      })
+    );
+}
 
   getFavorites(): any[] {
     return this.favouritesMovies;

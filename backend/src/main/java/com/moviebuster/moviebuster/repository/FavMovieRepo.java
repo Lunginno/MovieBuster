@@ -19,7 +19,7 @@ public interface FavMovieRepo extends JpaRepository<FavMovies, Long> {
     void softDeleteById(Long id);
 
     @Query("SELECT f FROM FavMovies f WHERE f.deleted = 0 AND f.user.id = :userId")
-    List<FavMovies> findActiveMoviesByUserId(Integer userId); // Rename method to match query intention
+    List<FavMovies> findActiveMoviesByUserId(Integer userId);
 
     List<FavMovies> findByTitle(String title);
 }

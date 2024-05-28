@@ -45,22 +45,26 @@ public class FavMovieController {
 //    }
 
     @PostMapping
-    public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId){
-
-//        FavMovies existingMovies = movieService.getMoviesByTitle(movie.getTitle());
-        List<FavMovies> existingMovies = movieService.getMoviesByTitle(movie.getTitle());
-
-        if (!existingMovies.isEmpty()){
-            throw new RuntimeException("Movie with the title '" + movie.getTitle() + "' already exists");
-        }
-
+    public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId) {
         // Fetch the user object based on the user ID
         Users user = userRepo.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
+        // Fetch the list of movies by title
+        List<FavMovies> existingMovies = movieService.getMoviesByTitle(movie.getTitle());
+
+        // Check if any of the existing movies belong to the specified user
+        boolean userHasMovie = existingMovies.stream()
+                .anyMatch(existingMovie -> existingMovie.getUser().getId().equals(userId));
+
+        if (userHasMovie) {
+            throw new RuntimeException("User with ID '" + userId + "' already has the movie with the title '" + movie.getTitle() + "'");
+        }
+
         // Associate the movie with the user
-//        movie.setUser(user);
-        // Save the movie
+        movie.setUser(user);
+
+        // Save the movie with the userId
         movieService.saveMovie(movie, userId);
     }
 
@@ -74,16 +78,16 @@ public class FavMovieController {
     {return movieService.getFavMovieById(id);}
 
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        movieService.softDelete(id);
-    }
-
-
-
 //    @DeleteMapping("/{id}")
 //    public void delete(@PathVariable Long id) {
-//        this.favMovieRepo.deleteById(id);
+//        movieService.softDelete(id);
 //    }
+
+
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        this.favMovieRepo.deleteById(id);
+    }
 
 }
