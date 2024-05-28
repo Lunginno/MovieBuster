@@ -34,9 +34,13 @@ public class FavMovies {
 
     private String movie_date;
 
+    private int deleted = 0; // 0 means not deleted, 1 means deleted
+
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
+//    private Integer userId;
 
 
 

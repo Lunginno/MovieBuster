@@ -4,6 +4,7 @@ import com.moviebuster.moviebuster.entity.FavMovies;
 import com.moviebuster.moviebuster.entity.Users;
 import com.moviebuster.moviebuster.repository.FavMovieRepo;
 import com.moviebuster.moviebuster.repository.UserRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,12 +60,17 @@ public class FavMovieServiceImpl implements FavMovieService {
     }
     @Override
     public List<FavMovies> getMoviesByUserId(Integer userId) {
-        return FavMovieRepo.findByUserId(userId);
+        return FavMovieRepo.findActiveMoviesByUserId(userId);
     }
 
     @Override
     public List<FavMovies> getMoviesByTitle(String title) {
         return FavMovieRepo.findByTitle(title);
+    }
+
+    @Transactional
+    public void softDelete(Long id) {
+        FavMovieRepo.softDeleteById(id);
     }
 
     @Override

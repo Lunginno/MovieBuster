@@ -1,5 +1,6 @@
 package com.moviebuster.moviebuster.auth;
 
+import com.moviebuster.moviebuster.entity.Users;
 import com.moviebuster.moviebuster.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,16 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<ResponseEntity<AuthenticationResponse>> authenticate(
+    public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(service.authenticate(request).getBody());
+    }
+
+    @GetMapping("/api/v1/user/{id}")
+    public Users getUserWithFavMovies(@PathVariable Integer id) {
+        return service.getUserWithFavMovies(id);
+
     }
 
     @CrossOrigin(origins = "http://localhost:8080/api/v1/auth")

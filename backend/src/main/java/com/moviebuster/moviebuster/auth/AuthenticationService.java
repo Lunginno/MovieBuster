@@ -4,6 +4,7 @@ import com.moviebuster.moviebuster.config.JwtService;
 import com.moviebuster.moviebuster.entity.Role;
 import com.moviebuster.moviebuster.entity.Users;
 import com.moviebuster.moviebuster.repository.UserRepo;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Optional;
+
+import static ch.qos.logback.classic.spi.ThrowableProxyVO.build;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +38,8 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
         repository.save(user);
-        String jwtToken = jwtService.generateToken(user);
+//        String jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateTokenWithId(user, user.getId());
         return ResponseEntity.ok(AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build());
@@ -50,9 +54,20 @@ public class AuthenticationService {
         );
         Users user = repository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found")); // Custom exception would be better
-        String jwtToken = jwtService.generateToken(user);
+//        String jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateTokenWithId(user, user.getId());
         return ResponseEntity.ok(AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build());
     }
+    public Users getUserWithFavMovies(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+//    public Users getUserById(Long id) {
+//        return repository.findById(Math.toIntExact(id))
+//                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+//                .build());
+//    }
 }
