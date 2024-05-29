@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Data
 @Transactional
 @Getter
@@ -30,9 +29,9 @@ public class Watchlist {
 
     private String movie_title;
 
-    private String movie_genre;
+    private String image;
 
-    private String relDate;
+    private String release_date;
 
     private float movie_rating;
 

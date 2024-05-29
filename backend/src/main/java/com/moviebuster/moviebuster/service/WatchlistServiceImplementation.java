@@ -34,8 +34,9 @@ public class WatchlistServiceImplementation implements WatchlistService{
         .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         watchlistRepo.save(movie);
 
-        movie.setUser(user);
+//        movie.setUser(user);
     }
+
 
     @Override
     public Watchlist getWatchlistById(Long id){

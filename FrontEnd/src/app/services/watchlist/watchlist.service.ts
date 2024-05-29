@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 
 export class WatchlistService {
 
-  private apiUrl = "http://localhost:8080/api/v1/auth/watchlist";
+  private apiUrl = "http://localhost:8080/api/v1/auth/wacthlist";
   watchlistMovies: any[] = [];
   userId: number | null = null;
 
@@ -21,6 +21,7 @@ export class WatchlistService {
 
     this.getWatchlist().subscribe(watchlist => {
       this.watchlistMovies = watchlist;
+      console.log(watchlist)
     });
   }
 
@@ -50,15 +51,14 @@ export class WatchlistService {
 
       return;
     }
-    const {id ,movie_title, movie_img, movie_genre, relDate, movie_rating } = movie;
+    const {id ,title, backdrop_path, release_date, vote_average } = movie;
 
   const payload = {
     id,
-    movie_title,
-    movie_img,
-    movie_genre,
-    relDate,
-    movie_rating,
+    movie_title:title,
+    image: backdrop_path,
+    release_date: release_date,
+    movie_rating: vote_average,
     user: {
       id: userId
     }

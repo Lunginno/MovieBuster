@@ -22,7 +22,7 @@ export class FavouritesComponent implements OnInit {
     this.favourite.getFavourites().subscribe(
       (response: any[]) => {
         this.data = response;
-        console.log('Favorite movies:', this.data);
+        console.log('Favorite movies: html', this.data);
       },
       (error: HttpErrorResponse) => {
         console.error('Error fetching favorite movies:', error.error.message);
