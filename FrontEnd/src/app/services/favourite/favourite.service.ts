@@ -52,7 +52,7 @@ export class FavouriteService {
         genre,
         movie_rating: vote_average,
         movie_date: release_date,
-        user: {
+        users: {
           id: userId
         }
       };

@@ -35,10 +35,17 @@ public class Users implements UserDetails {
     private String password;
 
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Set<FavMovies> favMovies;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Set<Watchlist> watchlist;
+
+//    //Including one to one relationshio with watchlist
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Watchlist watchlist;
 
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private Set<FavMovies> favMovies;

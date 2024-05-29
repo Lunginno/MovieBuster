@@ -28,7 +28,6 @@ const routes: Routes = [
   {path: '',   redirectTo: 'dashboard', pathMatch: 'full' }, 
   {path: 'details/:id', component: MovieDetailsComponent },
   {path: '**', component:DashboardComponent}
-
 ];
 
 @NgModule({

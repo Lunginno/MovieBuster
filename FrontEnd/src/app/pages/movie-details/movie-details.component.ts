@@ -46,9 +46,9 @@ export class MovieDetailsComponent implements OnInit {
     // Implement logic to add the movie to favorites
   }
 
-  addToList(m: any){  
+  addToWatchlist(m: any){  
     if(this.loginuser.getIsLoggedIn()){
-      this.watchlist.addToList(m);
+      this.watchlist.addToWacthlist(m);
       // m.addedToWatchlist = !m.addedToWatchlist;
       // console.log('Movie added' + this.watchlist.getList());
     }

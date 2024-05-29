@@ -37,7 +37,6 @@ public class FavMovieController {
         return movieService.getAllMovies();
     }
 
-//    @PostMapping
 
 //    @PostMapping
 //    public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId){

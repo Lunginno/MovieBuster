@@ -42,8 +42,6 @@ public class FavMovies {
     private Users user;
 //    private Integer userId;
 
-
-
 //     Define foreign key relationship with Users table
 //        @ManyToOne(fetch = FetchType.EAGER)
 //        @JoinColumn(name = "user_id")

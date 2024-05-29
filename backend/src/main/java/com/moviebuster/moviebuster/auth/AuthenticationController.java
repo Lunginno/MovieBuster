@@ -47,6 +47,16 @@ public class AuthenticationController {
             return ResponseEntity.ok().body(Collections.singletonMap("exists", false));
         }
     }
+
+    @GetMapping("/api/v1/user/watchlist{id}")
+    public Users getUserWithWatchlistMovie(@PathVariable Integer id){
+        return service.getUserWithWatchlist(id);
+    }
+
+//    @GetMapping ("/api/v1/user-watchlist/{id}")
+//        public Users getUserWithWatchlist(@PathVariable Integer id){
+//        return service.geUserWithWatchlist(id);
+//    }
 }
 
 
