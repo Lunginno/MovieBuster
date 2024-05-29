@@ -21,20 +21,20 @@ export class WatchlistService {
 
     this.getWatchlist().subscribe(watchlist => {
       this.watchlistMovies = watchlist;
-      console.log(watchlist)
+      // console.log(watchlist)
     });
   }
 
   getWatchlist(): Observable<any[]> {
     const userId = this.userId;
-    console.log(userId)
+    // console.log(userId)
 
     if(!userId){
       console.error('User Id is missing');
       return of([]);
     }
 
-    console.log(userId);
+    // console.log(userId);
     
     return this.http.get<any[]>(`${this.apiUrl}/user/${userId}`).pipe(
       catchError((error: HttpClient) => {
@@ -67,11 +67,11 @@ export class WatchlistService {
   this.http.post(`${this.apiUrl}?userId=${userId}`, payload)
   .subscribe(
     response => {
-      console.log('Movie added Successfully:', response);
+      // console.log('Movie added Successfully:', response);
     },
     
     error => {
-      console.error('Error adding movie', error);
+      // console.error('Error adding movie', error);
     }
   );
   }

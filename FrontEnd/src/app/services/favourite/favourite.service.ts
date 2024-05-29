@@ -23,7 +23,7 @@ export class FavouriteService {
 
   getFavourites(): Observable<any[]> {
     const userId = this.userId;
-    console.log(userId)
+    // console.log(userId)
     return this.http.get<any[]>(`${this.apiUrl}/user/${userId}`).pipe(
       catchError((error: HttpClient)=>{
         return throwError(error);
@@ -63,11 +63,11 @@ export class FavouriteService {
         .subscribe(
           response => {
           alert('movie added');
-            console.log('Movie added successfully:', response);
+            // console.log('Movie added successfully:', response);
           },
           error => {
             alert("Movie already Added");
-            console.error('Error adding movie:', error);
+            // console.error('Error adding movie:', error);
           }
         );
         

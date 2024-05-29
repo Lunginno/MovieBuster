@@ -22,11 +22,11 @@ export class FavouritesComponent implements OnInit {
     event.stopPropagation();
     this.favourite.removeFromFavorites(id).subscribe(
       (response: any) => {
-        console.log('Movie removed successfully:', response);
+        // console.log('Movie removed successfully:', response);
         this.getFavourites();
       },
       (error: HttpErrorResponse) => {
-        console.error('Error removing movie:', error.error.message);
+        // console.error('Error removing movie:', error.error.message);
       }
     );
   }

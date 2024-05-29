@@ -67,7 +67,7 @@ export class PpService {
       this.userId = this.extractUserIdFromToken(token); // Extract and store the user ID
       this.authStatusListener.next(true);
     } else {
-      console.log('No token found in local storage.');
+      // console.log('No token found in local storage.');
     }
   }
 
