@@ -27,7 +27,8 @@ public class Watchlist {
     @Id
     private Long id;
 
-    private String movie_title;
+    @Column(name = "movie_title")
+    private String movieTitle;
 
     private String image;
 

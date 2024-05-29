@@ -37,6 +37,7 @@ public class FavMovieController {
         return movieService.getAllMovies();
     }
 
+//    @PostMapping
 
 //    @PostMapping
 //    public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId){
@@ -45,16 +46,25 @@ public class FavMovieController {
 
     @PostMapping
     public void saveMovie(@RequestBody FavMovies movie, @RequestParam Integer userId) {
+        // Fetch the user object based on the user ID
         Users user = userRepo.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        // Check if the user already has a movie with the same title
-        movieService.getMovieByTitleAndUserId(movie.getTitle(), userId)
-                .ifPresent(existingMovie -> {
-                    throw new RuntimeException("User with ID '" + userId + "' already has the movie with the title '" + movie.getTitle() + "'");
-                });
+        // Fetch the list of movies by title
+        List<FavMovies> existingMovies = movieService.getMoviesByTitle(movie.getTitle());
 
+        // Check if any of the existing movies belong to the specified user
+        boolean userHasMovie = existingMovies.stream()
+                .anyMatch(existingMovie -> existingMovie.getUser().getId().equals(userId));
+
+        if (userHasMovie) {
+            throw new RuntimeException("User with ID '" + userId + "' already has the movie with the title '" + movie.getTitle() + "'");
+        }
+
+        // Associate the movie with the user
         movie.setUser(user);
+
+        // Save the movie with the userId
         movieService.saveMovie(movie, userId);
     }
 
