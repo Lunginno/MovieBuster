@@ -13,6 +13,5 @@ public interface FavMovieService {
     FavMovies getFavMovieById(Long id);
     List<FavMovies> getMoviesByUserId(Integer userId);
     List<FavMovies> getMoviesByTitle(String title);
-    public void softDelete(Long id);
     void deleteFavMovie(Long id);
 }

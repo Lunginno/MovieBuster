@@ -78,16 +78,10 @@ public class FavMovieController {
     {return movieService.getFavMovieById(id);}
 
 
-//    @DeleteMapping("/{id}")
-//    public void delete(@PathVariable Long id) {
-//        movieService.softDelete(id);
-//    }
-
-
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        this.favMovieRepo.deleteById(id);
+        movieService.deleteFavMovie(id);
     }
 
 }

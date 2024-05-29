@@ -37,7 +37,11 @@ ngOnInit():void{
   }
   
 }
-
+onEmailInput():void{
+  const emailControl = this.signIn.get('email');
+  const lowercaseEmail = emailControl?.value.toLowerCase();
+  emailControl?.setValue(lowercaseEmail,{emitEvent:false})
+}
 
 // it is triggered when a user clicks the submit login form
 signInForm()
@@ -46,7 +50,6 @@ signInForm()
   this.http.post<{token: string} > ("http://localhost:8080/api/v1/auth/authenticate", this.signIn.value)
   .subscribe(resp=>{
     const token = resp.token;
-    console.log(token);
     //Response received, search for user with provided email and password
     // const user=resp.find((details:any)=>{
     //   return details.email === this.signIn.value.email && details.password === this.signIn.value.password
@@ -75,4 +78,3 @@ signInForm()
 }
 
 }
-

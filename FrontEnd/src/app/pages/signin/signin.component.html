@@ -7,7 +7,7 @@
 
     <div class="email">
       <label for="email">Email: </label>
-      <input type="email" formControlName="email" class="form-control" id="email" placeholder="example@gmail.com">
+      <input type="email" formControlName="email" class="form-control"  (input)="onEmailInput()" id="email" placeholder="example@gmail.com">
     </div>
     <div class="error" *ngIf="signIn.get('email')?.hasError('required')&& signIn.get('email')?.touched">Email is required</div>
 

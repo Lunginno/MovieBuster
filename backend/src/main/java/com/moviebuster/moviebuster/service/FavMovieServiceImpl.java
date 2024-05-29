@@ -61,7 +61,7 @@ public class FavMovieServiceImpl implements FavMovieService {
     }
     @Override
     public List<FavMovies> getMoviesByUserId(Integer userId) {
-        return FavMovieRepo.findActiveMoviesByUserId(userId);
+        return FavMovieRepo.findMoviesByUserId(userId);
     }
 
     @Override
@@ -69,14 +69,10 @@ public class FavMovieServiceImpl implements FavMovieService {
         return FavMovieRepo.findByTitle(title);
     }
 
-    @Transactional
-    public void softDelete(Long id) {
-        FavMovieRepo.softDeleteById(id);
-    }
-
     @Override
+    @Transactional
     public void deleteFavMovie(Long id) {
-        this.FavMovieRepo.deleteById(id);
+        FavMovieRepo.deleteById(id);
     }
 
 }
