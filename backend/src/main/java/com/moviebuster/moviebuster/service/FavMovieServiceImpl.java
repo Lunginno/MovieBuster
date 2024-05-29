@@ -19,6 +19,8 @@ public class FavMovieServiceImpl implements FavMovieService {
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private FavMovieRepo favMovieRepo;
 
     @Override
     public List<FavMovies> getAllMovies(){
@@ -68,6 +70,11 @@ public class FavMovieServiceImpl implements FavMovieService {
     public List<FavMovies> getMoviesByTitle(String title) {
         return FavMovieRepo.findByTitle(title);
     }
+
+    public Optional<FavMovies> getMovieByTitleAndUserId(String title, Integer userId) {
+        return favMovieRepo.findByTitleAndUserId(title, userId);
+    }
+
 
     @Override
     @Transactional

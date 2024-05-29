@@ -62,10 +62,11 @@ export class FavouriteService {
       this.http.post(`${this.apiUrl}?userId=${userId}`, payload)
         .subscribe(
           response => {
-            alert("Added");
+          alert('movie added');
             console.log('Movie added successfully:', response);
           },
           error => {
+            alert("Movie already Added");
             console.error('Error adding movie:', error);
           }
         );

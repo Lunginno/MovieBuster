@@ -1,5 +1,6 @@
 import { group } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
+import { Token } from '@angular/compiler';
 import { Component } from '@angular/core';
 import {  FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ export class SignupComponent {
   public signUp !: FormGroup;
   public userLoggedIn: boolean = false;
   public userEmail: string = '';
+  token: string|null=null;
 
   constructor(private formbuilder: FormBuilder, private http: HttpClient, private router: Router, private authsev: PpService) {}
 
@@ -55,14 +57,36 @@ export class SignupComponent {
         newUser['id'] = this.newUsers+1;
 
 
-        this.http.post<any>("http://localhost:8080/api/v1/auth/register", newUser).subscribe(resp => {
+        this.http.post<{token: string} >("http://localhost:8080/api/v1/auth/register", newUser).
+        subscribe(resp => {
+          const token = resp.token;
+
+          if(token)
           console.log(this.userEmail);
-          
+          alert('Signed up successful');
+          this.token = token;
           this.userEmail = this.signUp.value.email;
+          localStorage.setItem("token", token);
           this.userLoggedIn = true;
-          // this.authsev.login(this.userEmail);
+          localStorage.getItem("token");
+          this.authsev.login(this.userEmail, token);
           this.signUp.reset();
           this.router.navigate(["home"]);
+          this.authsev.login(this.userEmail, token);
+          // if(token){
+          //   alert('Login Successful');
+          //  this.token = token;
+          //   this.userEmail = this.signIn.value.email;
+            
+          //   localStorage.setItem("token", token);
+          //   this.UserLoggedIn = true;
+          //   localStorage.getItem("token");
+          //   // this.watchlist.clearList();
+          //   // console.log(this.userEmail)
+          //   // this.signIn.reset();
+          //   this.router.navigate(["/home"])
+          //    this.authsev.login(this.userEmail, token);
+            // console.log(this.UserLoggedIn);
         }, error => {
           alert("Something went wrong");
         });

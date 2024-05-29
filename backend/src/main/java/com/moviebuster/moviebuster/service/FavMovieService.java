@@ -4,6 +4,7 @@ package com.moviebuster.moviebuster.service;
 import com.moviebuster.moviebuster.entity.FavMovies;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FavMovieService {
 
@@ -13,5 +14,6 @@ public interface FavMovieService {
     FavMovies getFavMovieById(Long id);
     List<FavMovies> getMoviesByUserId(Integer userId);
     List<FavMovies> getMoviesByTitle(String title);
+    public Optional<FavMovies> getMovieByTitleAndUserId(String title, Integer userId);
     void deleteFavMovie(Long id);
 }
