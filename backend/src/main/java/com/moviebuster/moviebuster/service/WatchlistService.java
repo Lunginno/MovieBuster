@@ -11,9 +11,11 @@ public interface WatchlistService {
     Watchlist getWatchlistById(Long id); //getting the watchlist item by ID
     List<Watchlist> getMoviesByUserId(Integer userId);
 
-//    List<Watchlist> getMovieTitle(String title);
+
 
     void deleteWatchlistMovieById(Long id);
+
+//    List<Watchlist> getMoviesByTitle(String movie_title);
 
     void deleteWatchlistMovie(Long id);
 

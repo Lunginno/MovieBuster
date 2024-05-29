@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface WatchlistRepo extends JpaRepository <Watchlist, Long>{
     List<Watchlist> findByUserId (Integer userId);
-
+//    List<Watchlist> findByTitle(String movie_title);
 //    List<Watchlist> getMovieTitle(String title);
 //    //Soft delete elements
 //    List<Watchlist> findByUserIdAndIsDeletedFalse(Integer userId);

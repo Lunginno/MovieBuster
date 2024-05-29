@@ -43,23 +43,38 @@ public class WatchlistController {
     @PostMapping
     public void saveMovie(@RequestBody Watchlist watchlist, @RequestParam Integer userId){
 
-////        FavMovies existingMovies = movieService.getMoviesByTitle(movie.getTitle());
-//        List<FavMovies> existingMovies = movieService.getMoviesByTitle(movie.getTitle());
-//
-//        if (!existingMovies.isEmpty()){
-//            throw new RuntimeException("Movie with the title '" + movie.getTitle() + "' already exists");
-//        }
-
         // Fetch the user object based on the user ID
         Users user = userRepo.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        // Associate the movie with the user
-//        movie.setUser(user);
-        // Save the movie
 
         watchserviceImplement.saveMovie(watchlist, userId);
     }
+
+//    //existing movie
+//    @PostMapping
+//    public void saveMovie(@RequestBody Watchlist watchlist, @RequestParam Integer userId) {
+//        // Fetch the user object based on the user ID
+//        Users user = userRepo.findById(userId)
+//                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+//
+//        // Fetch the list of movies by title
+//        List<Watchlist> existingMovies = watchserviceImplement.getMoviesByTitle(watchlist.getMovie_title());
+//
+//        // Check if any of the existing movies belong to the specified user
+//        boolean userHasMovie = existingMovies.stream()
+//                .anyMatch(existingMovie -> existingMovie.getUser().getId().equals(userId));
+//
+//        if (userHasMovie) {
+//            throw new RuntimeException("User with ID '" + userId + "' already has the movie with the title '" + watchlist.getMovie_title() + "'");
+//        }
+//
+//        // Associate the movie with the user
+//        watchlist.setUser(user);
+//
+//        // Save the movie with the userId
+//        watchserviceImplement.saveMovie(watchlist, userId);
+//    }
 
 
 //    @GetMapping("/user/{userId}")

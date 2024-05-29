@@ -63,11 +63,18 @@ public class WatchlistServiceImplementation implements WatchlistService{
         return watchlistRepo.findByUserId(userId);
     }
 
+//    @Override
+//    public List<Watchlist> getMovieByTitle(String movie_title) {return  watchlistRepo.findByTitle(movie_title);}
+
     @Override
     public void deleteWatchlistMovieById(Long id) {
         this.watchlistRepo.deleteById(id);
-
     }
+
+//    @Override
+//    public List<Watchlist> getMoviesByTitle(String movie_title) {
+//        return watchlistRepo.findByTitle(movie_title);
+//    }
 
 //    @Override
 //    public List<Watchlist> getMovieTitle(String title){

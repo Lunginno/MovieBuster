@@ -35,6 +35,14 @@ public class Watchlist {
 
     private float movie_rating;
 
+//    public String getMovie_title() {
+//        return movie_title;
+//    }
+//
+//    public void setMovie_title(String movie_title) {
+//        this.movie_title = movie_title;
+//    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
