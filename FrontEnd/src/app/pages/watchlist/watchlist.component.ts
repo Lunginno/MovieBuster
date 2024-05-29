@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 
@@ -7,27 +8,34 @@ import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.scss']
 })
-export class WatchlistComponent {
+export class WatchlistComponent implements OnInit{
 
-  constructor(private watchlistservice:WatchlistService,private router:Router){}
-  data: any[]=[];
+  data: any[] = [];
 
-  ngOnInit(){
-    this.data = this.watchlistservice.getList();
-    // console.log('watchlist data'  + this.data)
-    // this.watchlistservice.removeMovie(this.data);
+  constructor(private watchlist: WatchlistService, private router: Router){
+
   }
-
-  removeMovie(data:any){
-    this.watchlistservice.removeMovie(data);
-  }
-  goToMovieDetails(id: number) {
-    this.router.navigate(['/details', id]);
-  }
-
-  
     
-  
+  ngOnInit(): void {
+      this.getWatchlist();
+    }
 
+    getWatchlist():void{
+      this.watchlist.getWatchlist().subscribe(
+        (response: any[]) => {
+          this.data = response;
+          console.log('Watchlist movie:', this.data);
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error fetching favorite:', error.error.message);
+        }
+      ); 
+    }
+
+  
+  
+  goToWatchlist(id:number){
+    this.router.navigate(['/details',id]);
+  }
 
 }

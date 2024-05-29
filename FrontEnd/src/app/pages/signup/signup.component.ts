@@ -1,5 +1,6 @@
 import { group } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
+import { Token } from '@angular/compiler';
 import { Component } from '@angular/core';
 import {  FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,78 +12,91 @@ import { PpService } from 'src/app/services/pp.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-//formgroup define how all the different parts of your form should be organized and connected
-  public signUp !: FormGroup
+  public signUp !: FormGroup;
   public userLoggedIn: boolean = false;
   public userEmail: string = '';
+  token: string|null=null;
 
+  constructor(private formbuilder: FormBuilder, private http: HttpClient, private router: Router, private authsev: PpService) {}
 
-  constructor( private formbuilder: FormBuilder,private http: HttpClient, private router: Router,private authsev:PpService){}
-
-  //its void beause it doesnt retun anything
-  //it initializes tasks within a componentskk
-  ngOnInit():void
-  {
-   //Initialize the signIn form group with email, password and confirm password form controls
-   //A form group is a collection of form controls
-    this.signUp=this.formbuilder.group({
-      //form control lets you input or output data in a specific field of your form.
-      email: new FormControl('',Validators.required),
-      password: new FormControl('',Validators.required),
-      cpassword: new FormControl('',Validators.required)
-
-      //in the formgroup custom validator called checkpassword
-    },{validator:this.checkPasswords });
+  ngOnInit(): void {
+    this.signUp = this.formbuilder.group({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.compose([ 
+        Validators.required,
+        Validators.maxLength(20), 
+        Validators.pattern ('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^/&\\\\]).{6,}$'),
+      ])),
+      cpassword: new FormControl('', Validators.required)
+    }, { validator: this.checkPasswords });
   }
-//takes a FormGroup as an argument, which represents the entire form group to be validated
-  checkPasswords(formgroup:FormGroup):any{
-    
-    const password =formgroup.get('password')?.value;
-    const cpassword =formgroup.get('cpassword')?.value;
+
+  checkPasswords(formgroup: FormGroup): any {
+    const password = formgroup.get('password')?.value;
+    const cpassword = formgroup.get('cpassword')?.value;
 
     if (password === cpassword) {
       return null; // Passwords match
-  } else {
+    } else {
       return { passwordMismatch: true }; // Passwords don't match
+    }
   }
-}
-  
+  newUsers = 0;
+  signup() {
+    if (this.signUp.invalid) return;
 
-  signup()
-  {
-    //check if the signup form is invalid
-    if(this.signUp.invalid)return;
-    //getting the email value from the form
-    const userEmail=this.signUp.get('email')?.value;
-    //email as a query parameter(is a way to pass data between web pages)
-    this.http.get<any>(`http://localhost:3000/signupUsersList/?email=${userEmail}`).subscribe(existingUser => {
-    //checks if the response from the server contains any existing user data. 
-    if (existingUser.length > 0) {
-        // Email already exists, inform the user and prevent signup
-        alert('Email already registered.');
-      } else {
+    const userEmail = this.signUp.get('email')?.value;
 
-    
-    //we posting the value of the signup form to the json file
-    this.http.post<any>("http://localhost:3000/signupUsersList/",this.signUp.value).subscribe(resp=>{
-//  once the data is posted it respond with sign up successful
-      // console.log('sign up successful');
-      //the navigator method accepts an array of route as an argument
-      this.userEmail = this.signUp.value.email;
-      this.userLoggedIn = true;
-      this.authsev.login(this.userEmail);
-      // console.log(this.userEmail)
-      this.signUp.reset();
-      this.signUp.reset()
-      this.router.navigate(["login"])
-      
-    },error=>{
-        alert("something went wrong");
+    // Check if the user already exists
+    // this.http.get<any>(`http://localhost:8080/api/v1/auth/register/?email=${userEmail}`).subscribe(existingUser => {
+    //   if (existingUser.length > 0) {
+    //     alert('Email already registered.');
+    //   } else {
+        // If user doesn't exist, proceed with signup
+        let newUser = this.signUp.value;
+        newUser['id'] = this.newUsers+1;
 
-    });
-    }})
-  
+
+        this.http.post<{token: string} >("http://localhost:8080/api/v1/auth/register", newUser).
+        subscribe(resp => {
+          const token = resp.token;
+
+          if(token)
+          console.log(this.userEmail);
+          alert('Signed up successful');
+          this.token = token;
+          this.userEmail = this.signUp.value.email;
+          localStorage.setItem("token", token);
+          this.userLoggedIn = true;
+          localStorage.getItem("token");
+          this.authsev.login(this.userEmail, token);
+          this.signUp.reset();
+          this.router.navigate(["home"]);
+          this.authsev.login(this.userEmail, token);
+          // if(token){
+          //   alert('Login Successful');
+          //  this.token = token;
+          //   this.userEmail = this.signIn.value.email;
+            
+          //   localStorage.setItem("token", token);
+          //   this.UserLoggedIn = true;
+          //   localStorage.getItem("token");
+          //   // this.watchlist.clearList();
+          //   // console.log(this.userEmail)
+          //   // this.signIn.reset();
+          //   this.router.navigate(["/home"])
+          //    this.authsev.login(this.userEmail, token);
+            // console.log(this.UserLoggedIn);
+        }, error => {
+          alert("Something went wrong");
+        });
+      }
+  //   });
+  // }
+
+  onEmailInput():void{
+    const emailControl = this.signUp.get('email');
+    const lowercaseEmail = emailControl?.value.toLowerCase();
+    emailControl?.setValue(lowercaseEmail,{emitEvent:false})
   }
-
-
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { DataApiService } from 'src/app/services/api/data-api.service';
+import { FavouriteService } from 'src/app/services/favourite/favourite.service';
 import { PpService } from 'src/app/services/pp.service';
 import { WatchlistService } from 'src/app/services/watchlist/watchlist.service';
 
@@ -18,7 +19,8 @@ export class MovieDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private watchlist :WatchlistService,
     private loginuser: PpService,
-    private router:Router
+    private router:Router,
+    private fav_service:FavouriteService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class MovieDetailsComponent implements OnInit {
         error: (err) => console.error(err)
       });
     });
+  
 
   }
   getMovieImageUrl(path: string): string {
@@ -38,9 +41,14 @@ export class MovieDetailsComponent implements OnInit {
     return `${baseUrl}${size}${path}`;
   }
 
-  addToList(m: any){  
+  addToFavorites(): void {
+    this.fav_service.addToFavorites(this.movie);
+    // Implement logic to add the movie to favorites
+  }
+
+  addToWatchlist(m: any){  
     if(this.loginuser.getIsLoggedIn()){
-      this.watchlist.addToList(m);
+      this.watchlist.addToWacthlist(m);
       // m.addedToWatchlist = !m.addedToWatchlist;
       // console.log('Movie added' + this.watchlist.getList());
     }

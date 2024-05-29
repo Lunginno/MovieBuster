@@ -1,4 +1,6 @@
 <app-nav-bar></app-nav-bar>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WHJCh1B3GagwsXIr5SkDi3G5FLt2m7bk7YxEZyoORhVQ1A36eQKsK0wOk6G8UJLlzOuJm93gLaqP83sVDZiRfA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -17,7 +19,15 @@
         </div>
         <div>
           <!-- use addedToWatchlist after the login is done-->
-          <button (click)="addToList(movie)">{{ movie.addedToWatchlist ? 'Added' : 'Add to watchlist' }}</button>
+          <button (click)="addToWatchlist(movie)">{{ movie.addedToWatchlist ? 'Added' : 'Add to watchlist' }}</button>
+          <button (click)="addToFavorites()">
+            <i class="fas fa-heart"></i> Add to Favorites
+          </button>
+          
+          
+        </div>
+        <div>
+          
         </div>
         
         <!-- <p>{{ movie.genres[0].name }}, {{ movie.genres[1].name }}, {{ movie.genres[2].name }}</p> -->

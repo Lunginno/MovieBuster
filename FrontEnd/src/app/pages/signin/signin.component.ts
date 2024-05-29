@@ -15,6 +15,8 @@ export class SigninComponent {
 public signIn !: FormGroup
 public UserLoggedIn: boolean = false;
   public userEmail: string = '';
+  private token: string | undefined;
+  private tokenExpirationTimer:any;
 
 
 
@@ -26,28 +28,47 @@ ngOnInit():void{
     email:["",Validators.required],
     password:["",Validators.required]
   })
+
+  const token = localStorage.getItem('token');
+  if(token){
+    this.authsev.login(this.userEmail, token);
+  }else{
+    this.router.navigate(['/login'])
+  }
   
+}
+onEmailInput():void{
+  const emailControl = this.signIn.get('email');
+  const lowercaseEmail = emailControl?.value.toLowerCase();
+  emailControl?.setValue(lowercaseEmail,{emitEvent:false})
 }
 
 // it is triggered when a user clicks the submit login form
 signInForm()
 {
   //Sends HTTP GET request to retrieve user data
-  this.http.get<any>("http://localhost:3000/signupUsersList").subscribe(resp=>{
+  this.http.post<{token: string} > ("http://localhost:8080/api/v1/auth/authenticate", this.signIn.value)
+  .subscribe(resp=>{
+    const token = resp.token;
     //Response received, search for user with provided email and password
-    const user=resp.find((details:any)=>{
-      return details.email === this.signIn.value.email && details.password === this.signIn.value.password
+    // const user=resp.find((details:any)=>{
+    //   return details.email === this.signIn.value.email && details.password === this.signIn.value.password
     
-    });
-    if(user){
+    // });
+
+    if(token){
       alert('Login Successful');
+     this.token = token;
       this.userEmail = this.signIn.value.email;
+      
+      localStorage.setItem("token", token);
       this.UserLoggedIn = true;
-      this.authsev.login(this.userEmail);
-      this.watchlist.clearList();
+      localStorage.getItem("token");
+      // this.watchlist.clearList();
       // console.log(this.userEmail)
-      this.signIn.reset();
-      this.router.navigate(["home"])
+      // this.signIn.reset();
+      this.router.navigate(["/home"])
+       this.authsev.login(this.userEmail, token);
       // console.log(this.UserLoggedIn);
     }else{
       alert("user not found")
@@ -57,4 +78,3 @@ signInForm()
 }
 
 }
-
