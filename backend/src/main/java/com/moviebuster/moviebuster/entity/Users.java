@@ -41,7 +41,7 @@ public class Users implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private Set<Watchlist> watchlist;
+    private Set<WatchlistMovie> watchlistMovie;
 
 //    //Including one to one relationshio with watchlist
 //    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
