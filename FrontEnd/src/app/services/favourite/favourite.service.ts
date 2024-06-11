@@ -43,10 +43,10 @@ export class FavouriteService {
     // if (!this.favouritesMovies.includes(movie)) {
       // this.favouritesMovies.push(movie);
       // movie.addedToWatchlist = true;
-      const { id, title, backdrop_path, genre, vote_average, release_date } = movie;
+      const { id,title, backdrop_path, genre, vote_average, release_date } = movie;
 
       const payload = {
-        id,
+        id: id,
         title,
         backdrop_path,
         genre,

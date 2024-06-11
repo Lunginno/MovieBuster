@@ -20,8 +20,10 @@ import java.util.Set;
 public class FavMovies {
 
     @GeneratedValue(strategy = GenerationType.AUTO) //Method for the id
-    @Column(name = "id")
+    @Column(name = "movieId")
     @Id
+    private Long movieId;
+
     private Long id;
 
     private String title;
