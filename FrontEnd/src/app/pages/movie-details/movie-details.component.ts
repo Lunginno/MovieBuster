@@ -48,7 +48,7 @@ export class MovieDetailsComponent implements OnInit {
 
   addToWatchlist(m: any){  
     if(this.loginuser.getIsLoggedIn()){
-      this.watchlist.addToWacthlist(m);
+      this.watchlist.addToWatchlist(m);
       // m.addedToWatchlist = !m.addedToWatchlist;
       // console.log('Movie added' + this.watchlist.getList());
     }

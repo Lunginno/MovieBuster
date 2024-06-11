@@ -20,6 +20,19 @@ export class WatchlistComponent implements OnInit{
       this.getWatchlist();
     }
 
+    removeMovie(id: number, event: Event): void {
+      event.stopPropagation();
+      this.watchlist.removeFromWatchlist(id).subscribe(
+        (response: any) => {
+          // console.log('Movie removed successfully:', response);
+          this.getWatchlist();
+        },
+        (error: HttpErrorResponse) => {
+          // console.error('Error removing movie:', error.error.message);
+        }
+      );
+    }
+
     getWatchlist():void{
       this.watchlist.getWatchlist().subscribe(
         (response: any[]) => {
