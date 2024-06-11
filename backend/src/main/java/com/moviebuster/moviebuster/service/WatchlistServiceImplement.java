@@ -68,8 +68,9 @@ public class WatchlistServiceImplement implements WatchlistService {
     }
 
     @Override
+    @Transactional
     public void deleteWatchlistMovie(Long id) {
-
+        watchlistRepo.deleteById(id);
     }
 //
 //    @Override
